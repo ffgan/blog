@@ -54,7 +54,7 @@ ASF比较出名的一个项目是一个叫httpd的HTTP服务器（LAMP当中的A
 ## 会议日程
 
 在杭州举办，时间为7.26-7.28，每天分为上午和下午，上午是主会场，下午是多个主题多个分会场。
-日程具体 <https://asia.communityovercode.org/schedule.html>
+日程具体 <https://asia.communityovercode.org/schedule.html> (每年有新的日程时会刷新，2025年将在北京举办)
 我由于时间原因只参加了最后一天的会议。
 
 会议全程有录播回放，[链接](https://www.youtube.com/watch?v=7uIAeegYwLQ&list=PLU2OcwpQkYCw-J71WjgmeD9BYOK67xjG2)
