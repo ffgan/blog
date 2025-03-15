@@ -10,7 +10,7 @@ ASF比较出名的一个项目是一个叫httpd的HTTP服务器（LAMP当中的A
 
 ## 基金会担任的角色
 
-![基金会在社区和商业公司之间的扮演的角色](role_between_company_and_community.png)
+![基金会在社区和商业公司之间的扮演的角色](images/role_between_company_and_community.png)
 
 图片来自[此处](https://opensourceway.community/posts/foundation_introduce/foundation-introduce-in-fascinate-os/)
 
@@ -39,17 +39,17 @@ ASF比较出名的一个项目是一个叫httpd的HTTP服务器（LAMP当中的A
 
 拿门锁拍的，av画质
 
-![ant_group_opensource](ant_group_opensource.png)
+![ant_group_opensource](images/ant_group_opensource.png)
 
-![bytedance_opensource](bytedance_opensource.png)
+![bytedance_opensource](images/bytedance_opensource.png)
 
-![selectdb_opensource](selectdb_opensource.png)
+![selectdb_opensource](images/selectdb_opensource.png)
 
-![openbayes_opensource](openbayes_opensource.png)
+![openbayes_opensource](images/openbayes_opensource.png)
 
-![xiaomi_opensource](xiaomi_opensource.png)
+![xiaomi_opensource](images/xiaomi_opensource.png)
 
-![aliyun_opensource](aliyun_opensource.png)
+![aliyun_opensource](images/aliyun_opensource.png)
 
 ## 会议日程
 
