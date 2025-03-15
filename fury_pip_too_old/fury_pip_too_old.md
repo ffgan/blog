@@ -8,7 +8,7 @@ Fury在序列化、反序列化的速度都比Protobuf好，体积还更小，�
 
 琢磨了下Python写Go读的情况，Go报了一个二进制文件不以magic number开头的错，翻文档可以看到这是用来标记是Fury序列化的格式（作者说是能识别出来自哪个语言的编码然后可以加速反序列化），Go读/写文件的开头的确有对应的magic number，但是Python翻遍了也没见着。当前情况Fury都是选择跨语言模式（叫XLANG，Fury定义的，不重要）。Go在源码那里可以看到确实加了句如果是XLANG会写入一个magic number。去Pypi下了个最新的0.4.1版，的确没有，23年12月（time.now(), 24年9月）的包，应该不会太旧吧。按理说这规范都不遵，跨语言跨了个寂寞。再跑去Fury源码那里看了下，有的，而且是2024.4.20加的
 
-![img](AVvXsEgQX1JROF12yEwsld5Gyuj37Z5_-o-vm-gLJv0ckyS0cc5zvLnOmtIwdnbcmPWZxFTm2aKdDFejKoA_FBQ3YTnGv_9Z0vaZB7Zyq6BpIWImzV9IYkqSo6mfMF-DY9rlYGFbfJSm8N27PqZAFqGAKVw4Y3Q4uyJeK-uYp5RydJa2PW3V_pgGxBjh58VJARk=w566-h168.png)
+![img](images/AVvXsEgQX1JROF12yEwsld5Gyuj37Z5_-o-vm-gLJv0ckyS0cc5zvLnOmtIwdnbcmPWZxFTm2aKdDFejKoA_FBQ3YTnGv_9Z0vaZB7Zyq6BpIWImzV9IYkqSo6mfMF-DY9rlYGFbfJSm8N27PqZAFqGAKVw4Y3Q4uyJeK-uYp5RydJa2PW3V_pgGxBjh58VJARk=w566-h168.png)
 
 发了issue过去请求作者打包新版了，但是等作者回应可能得一段时间，有源码那就自己动手打包得了。之前也并没有试过pypi打包，在此顺便学一下打包发行，在fury项目可以看到是用github action自动打包，py的打包脚本在[这里](https://github.com/apache/fury/blob/main/.github/workflows/release.yaml)。
 
@@ -50,7 +50,7 @@ pip install -v -e .
 
 虽然报的错比我写的代码还多，但是不影响，对着输出直接grep fatal和error即可，再安装一些包就行。
 
-![img](AVvXsEjbZxjSl-9Yxw3F_CYI4Zj09_2FhMsO7WBxDqB7b1nYsMOmaF4426z0kxAk3JyBWTD6mRFlsjM788uUxSc6RL3J1Qa84SeyfHRGt0rvkBl1k_SP8wvRk9olpRlxnuIM5pFO4F1MH4ZogQihhtXgaISfx2j6OQP85Ycjki3wZbMv06xRmwGUuZE5IQcnE4c.png)
+![img](images/AVvXsEjbZxjSl-9Yxw3F_CYI4Zj09_2FhMsO7WBxDqB7b1nYsMOmaF4426z0kxAk3JyBWTD6mRFlsjM788uUxSc6RL3J1Qa84SeyfHRGt0rvkBl1k_SP8wvRk9olpRlxnuIM5pFO4F1MH4ZogQihhtXgaISfx2j6OQP85Ycjki3wZbMv06xRmwGUuZE5IQcnE4c.png)
 
 构建完了就可以打包了。
 
@@ -60,7 +60,7 @@ python setup.py bdist_wheel --dist-dir=./dist
 
 最后得到轮子（大雾）
 
-![img](AVvXsEiw6noXNEa9cFAXmhb-HOJGnbnsyhuHqQmqiWp2sTOPtBRiy3TOWFYwJbZQ-UkVof0-hEeSPe3x36GPAGNuu0Xo1GLaJUbwSF2xbtGD-8qh8m55KQ6C7WrNfuyXaKvFblCoz6fYE4pcJjSch4jpj0qXGzlx7JyS-ESAOikGAKGipIjKUM93V92YT44JKJU.png)
+![img](images/AVvXsEiw6noXNEa9cFAXmhb-HOJGnbnsyhuHqQmqiWp2sTOPtBRiy3TOWFYwJbZQ-UkVof0-hEeSPe3x36GPAGNuu0Xo1GLaJUbwSF2xbtGD-8qh8m55KQ6C7WrNfuyXaKvFblCoz6fYE4pcJjSch4jpj0qXGzlx7JyS-ESAOikGAKGipIjKUM93V92YT44JKJU.png)
 
 再装上。
 
