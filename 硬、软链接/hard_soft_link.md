@@ -183,6 +183,11 @@ Change: 2025-04-17 15:19:30.862800277 +0800
 下面来说说我之前看到过的一些相关的有意思的新闻，内容会比较散，可以跳过不读。
 
 1. [fedora的一个提案，统一/usr/bin和/usr/sbin，这个arch好像早就统一了](https://fedoraproject.org/wiki/Changes/Unify_bin_and_sbin)
+![alt text](images/1744942913297_image.png)
+
+目前来看还没合，不过最外层的/bin和/sbin已经软链接指向了/usr/bin和/usr/sbin
+
+![alt text](images/1744943060675_image.png)
 
 ## 7. 参考链接
 
