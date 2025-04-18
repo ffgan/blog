@@ -61,8 +61,8 @@ ASF比较出名的一个项目是一个叫httpd的HTTP服务器（LAMP当中的A
 
 ### 7.28 上午日程
 
-1. 开源人才的能力评估与培养
-2. 用开源构建你的职业生涯
-3. 一位工程师在 Apache 坚持且热爱的开源之旅
-4. 非技术人在开源社区的成长
+1. [开源人才的能力评估与培养](https://www.youtube.com/watch?v=jlC3JnEhaWE&list=PLU2OcwpQkYCw-J71WjgmeD9BYOK67xjG2)
+2. [用开源构建你的职业生涯](https://www.youtube.com/watch?v=anObj3pjYr4&list=PLU2OcwpQkYCw-J71WjgmeD9BYOK67xjG2&index=74)
+3. [一位工程师在 Apache 坚持且热爱的开源之旅](https://www.youtube.com/watch?v=CMAyGhb0mpA&list=PLU2OcwpQkYCw-J71WjgmeD9BYOK67xjG2)
+4. [非技术人在开源社区的成长](https://www.youtube.com/watch?v=tiQmFBE_H_o&list=PLU2OcwpQkYCw-J71WjgmeD9BYOK67xjG2)
 5. 闪电演讲
