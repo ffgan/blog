@@ -20,7 +20,7 @@
 
 再有就是看过一点点点点的openssl里面的源码，在c看到了有一堆的函数指针、上千行的函数，小小的震撼了只会hello world的我。
 
-## 3. 为什么对密码学感兴趣？
+### 3. 为什么对密码学感兴趣？
 
 最早觉得比较神奇的是SSH的密钥登陆，不用输入密码来登陆，而且安全性比我记住的哪怕是几十位密码都要高，背后的巧妙原理正是非对称加密。
 
@@ -33,3 +33,10 @@
 指望通过本篇blog来学习密码学是不可能的。更加正确的做法应该是去寻找相关的专业课程学习。
 
 本篇blog仅仅只是我自己对于密码学的一些见解与看法
+
+## -1. 一些有用的参考链接
+
+1. [Google Cloud对于加密的介绍](https://cloud.google.com/learn/what-is-encryption?hl=zh-CN)
+2. [Wikipedia对于密码学的介绍](https://zh.wikipedia.org/wiki/%E5%AF%86%E7%A0%81%E5%AD%A6)
+3. [ctf-wiki对于密码学的介绍](https://ctf-wiki.org/crypto/introduction/)
+4. [cloudflare对于加密的介绍](https://www.cloudflare-cn.com/learning/ssl/what-is-encryption/)
