@@ -79,6 +79,18 @@
 
 在密钥分发问题中，有一个比较有意思的话题，有一种绝对安全的方法来实现加解密，一次性密码本（one-time pad，OTP），不单单只是用了一次密码来加解密就扔了就可以叫做OTP，他有三个条件需要满足，密码是随机生成的，**密码至少要和明文一样长**，密码只能用一次。信息学之父香农证明了这个密码是绝对安全的。如果我要用OTP来加解密，首先要解决的就是怎么把这个和明文等长的密码安全的分发给对方，如果我都能安全的分发这个一次性的密码，我还不如直接安全的分发明文，要密码做什么😈。
 
+本篇blog不打算介绍传统的AES、RSA算法等的证明、使用等，因为网上已经有足够多的教程来介绍了。本篇blog打算来介绍一下ML-KEM。
+
+本篇刚开始提及了NIST为了抵抗量子计算机对传统加密算法的威胁，征集并推出了[三个PQC算法](https://csrc.nist.gov/projects/post-quantum-cryptography)，其中有一个是ML-KEM（Module-Lattice-Based Key-Encapsulation Mechanism Standard，基于模块格的密钥封装机制）。
+
+## 2. ML-KEM
+
+所谓密钥封装机制，可以看作密钥交换的另一种叫法（以前那个DH协议，全称叫做Diffie–Hellman key exchange）。也就是这个ML-KEM提供了一种密钥封装的算法，能够用于传输对称式加密中需要事先交换的密钥。
+
+这里是NIST给出的标准,[链接](https://csrc.nist.gov/pubs/fips/203/final),更具体点的pdf文档在[这里](https://doi.org/10.6028/NIST.FIPS.203)。
+
+先不提及里面的专业术语，就这篇标准来说，写的极其用心，极其佩服撰写这篇标准的作者们。即使不是专门学习过密码学的外行，细心钻读这篇标准也能看懂ML-KEM的基本原理+实现。恰好Go1.24刚发布不久，里面[有一个更新](https://go.dev/doc/go1.24#crypto-mlkem)就是内置库添加了对于ML-KEM的支持，我果断打开源码一看，好家伙，基本就是对着标准来逐行翻译。边看标准边看Go这边的内置库实现，二者都极其赏心悦目。
+
 ## -1. 一些有用的参考链接
 
 1. [Google Cloud对于加密的介绍](https://cloud.google.com/learn/what-is-encryption?hl=zh-CN)
