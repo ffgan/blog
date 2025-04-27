@@ -105,7 +105,45 @@ Alice在收到密文后，使用dk以及解封装算法（Decaps）来得到共�
 
 总结一下ML-KEM分为三步，密钥生成、封装密钥、解封装密钥。
 
+Go官方的ml-kem库给了一个[example](https://pkg.go.dev/crypto/mlkem#pkg-overview)，可以对照着上面的步骤来看。
+
 ### 2.1 密钥生成
+
+这里写起来就比较硬核了，需要一点点啃。
+
+**以下所有图片均来自FIPS 203 标准**
+
+先来看看整体的最外层，密钥生成自然不需要任何输入，输出有ek和dk。ek对外公布，dk保密。
+
+![alt text](images/1745732659060_image.png)
+
+首先是生成两个随机数𝑑和𝑧，都是32字节的。生成随机数后将两者作为参数传入 ML-KEM.KeyGen_internal 。返回得到(ek,dk)二元组。
+
+这里可以和Go的ml-kem库实现一起来看。
+
+```Go
+func generateKey(dk *DecapsulationKey768) (*DecapsulationKey768, error) {
+	var d [32]byte
+	drbg.Read(d[:])
+	var z [32]byte
+	drbg.Read(z[:])
+	kemKeyGen(dk, &d, &z)
+	if err := fips140.PCT("ML-KEM PCT", func() error { return kemPCT(dk) }); err != nil {
+		// This clearly can't happen, but FIPS 140-3 requires us to check.
+		panic(err)
+	}
+	fips140.RecordApproved()
+	return dk, nil
+}
+```
+
+可以看到同样是生成了两个随机数，至于里面是怎么生成的，暂时不用管，后面有空再来填坑了。
+
+(小彩蛋，注意看generateKey里面的注释。我记得好像gcc源码里也有一个类似说，xxx标准还是委员会说this is a macro，make them happy)
+
+那么里面的kemKeyGen就是重头戏了。但是要先来看看标准里怎么做的
+
+
 
 ### 2.2 封装密钥
 
