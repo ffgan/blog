@@ -117,9 +117,12 @@ Go官方的ml-kem库给了一个[example](https://pkg.go.dev/crypto/mlkem#pkg-ov
 
 ![alt text](images/1745732659060_image.png)
 
+图里的k和ml-kem的参数有关
+![alt text](images/1745737009490_image.png)
+
 首先是生成两个随机数𝑑和𝑧，都是32字节的。生成随机数后将两者作为参数传入 ML-KEM.KeyGen_internal 。返回得到(ek,dk)二元组。
 
-这里可以和Go的ml-kem库实现一起来看。
+这里可以和Go的ml-kem库实现一起来看。以下以里面ml-kem-768来介绍
 
 ```Go
 func generateKey(dk *DecapsulationKey768) (*DecapsulationKey768, error) {
