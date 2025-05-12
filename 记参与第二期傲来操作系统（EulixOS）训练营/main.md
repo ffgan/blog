@@ -20,7 +20,7 @@ b站视频，直接2倍速起飞看。还是很有意思的，前面主要是计
 
 配置环境的话，实测下来fedora是无法直接交叉编译的。原因如下。
 ![alt text](images/1747059281459_image.png)
-所以如果在x86的fedora用dnf装了gcc-riscv64也跑不起来，缺库。
+所以如果在x86的fedora用dnf装了gcc-riscv64也跑不了用户程序交叉编译，缺库。
 
 直接使用教程里给出的tool然后配置一下bashrc或者profile就行
 
