@@ -291,3 +291,5 @@ dnf install libjpeg-devel cargo -y
 然后就可以开始跑测试了
 
 ![alt text](images/1747324902537_image.png)
+
+跑了快一个小时，4G内存吃完了就不动了。把主机内存全给他吃吧。
