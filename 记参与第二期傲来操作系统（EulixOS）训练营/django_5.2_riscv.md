@@ -31,6 +31,7 @@ pip install django==5.2
 版本对上了。接下来启动一个django项目看看什么情况。之前django玩挺多，现在是忘挺多。打开官网得到一个对应的版本的quick start, [链接](https://docs.djangoproject.com/en/5.2/intro/tutorial01/)，按图索骥。
 
 1. 确定装了django
+
 ```shell
 python -m django --version
 # output: 5.2
@@ -42,6 +43,7 @@ python -m django --version
 mkdir djangotutorial
 django-admin startproject mysite djangotutorial
 ```
+
 顺利的话，啥输出都没有。
 
 ls看看创建出来的文件夹  
@@ -88,6 +90,7 @@ dnf/yum都可以，和小红帽一样。
 ```shell
 python3 -m pip install --upgrade build
 ```
+
 ![alt text](images/1747303733259_image.png)
 
 2. 打包
@@ -107,12 +110,14 @@ git忘记切换版本了，`git check 5.2`，再重新构建。
 
 （题外话
 openeuler的这个qemu虚拟机时间不太对，可以这样来调整,
+
 ```shell
 timedatectl set-timezone "Asia/Shanghai" # 改时区
 dnf install chrony -y
 systemctl start chronyd
 chronyc makestep # 显示200即可同步时间
 ```
+
 ）
 
 先把之前通过pip install的django5.2 uninstall掉。然后指定安装刚才构建出来的whl即可
@@ -142,15 +147,23 @@ dnf install make -y
 ```
 
 毫无疑问，依旧有报错，变成了下面这个。
+
 ![alt text](images/1747314892298_image.png)
 
 ![alt text](images/1747314928450_image.png)
+
 报错信息还是比较清晰的，cmake这个whl构建不出来，再往上查找一下日志可以看到这个
+
 ![alt text](images/1747314976257_image.png)
+
 预期是使用>=3.15即可，然后这里使用了4.0.2。这里尝试一下直接指定用3.15。
+
 ![alt text](images/1747315110479_image.png)
+
 改用最近的3.16.3.
+
 ![alt text](images/1747315203075_image.png)
+
 又报新的错。这样下去不行。
 
 cmake的话，试试看dnf能否装。
@@ -166,9 +179,11 @@ dnf install cmake -y
 ```shell
 dnf install gcc g++ -y
 ```
+
 编译了老半天，cpu能吃满。然后还是无情报错。
 
 新的报错如下
+
 ![alt text](images/1747316634348_image.png)
 
 可以看到是在patchelf这个包的问题，里面的bootstrap.sh第二行用了一个autoreconf，报找不到。简单检索可得，安装autoconf即可。
@@ -201,6 +216,7 @@ dnf install python3-devel -y
 其实这些报错都可以避免的，因为C和Pypi的包构建对这些都是必需的。也许可以在build之前检查有无这些，不然卡老半天报错再来解决。不过实现起来当然也是无比复杂的。
 
 经典CPU吃满
+
 ![alt text](images/1747318263602_image.png)
 
 经过约摸半小时的构建，numpy成功装上。当然，少不了新的报错。
@@ -232,24 +248,45 @@ dnf install libffi-devel -y
 ![alt text](images/1747321588446_image.png)
 
 依次解决
+
 ```shell
 dnf install rustc zlib-devel libmemcached-devel -y
 ```
 
-新的报错 1 
+新的报错 1
+
 ![alt text](images/1747322319944_image.png)
 
 新的报错 2
+
 ![alt text](images/1747322457412_image.png)
 
 ```shell
 dnf install libjpeg-devel cargo -y
 ```
 
-
 最终圆满装上
 
 ![alt text](images/1747323726461_image.png)
+
+下面可以看到本地build出来的wheel
+
+```shell
+[root@localhost wheels]# find /root/.cache/pip -name '*riscv64.whl'
+/root/.cache/pip/wheels/6f/5a/c0/4b0c781fcffcafdf2fc0a565fe9ea4f34e43c133730da3dec2/pywatchman-2.0.0-cp311-cp311-linux_riscv64.whl
+/root/.cache/pip/wheels/dc/6c/a5/9ba95fb773ed63f6f36779baf2612931788b74bb3a789d1f62/pillow-11.2.1-cp311-cp311-linux_riscv64.whl
+/root/.cache/pip/wheels/bb/96/19/f031a7d18951d458b7c123d62233433a73d0b822998aff4ec3/aiohttp-3.11.18-cp311-cp311-linux_riscv64.whl
+/root/.cache/pip/wheels/9d/38/99/1f61f3b0dd7ab4898edfa9fcf6feb13644d4d49a44b3bed19d/markupsafe-3.0.2-cp311-cp311-linux_riscv64.whl
+/root/.cache/pip/wheels/cd/ac/c1/ba4b4a441600cf3c279a8c9db8b9410257940ff0070afbc563/bcrypt-4.3.0-cp311-cp311-linux_riscv64.whl
+/root/.cache/pip/wheels/b8/18/c9/a87b7ef403a539e29b302a26cef15c8aff336e7799119bb678/argon2_cffi_bindings-21.2.0-cp311-abi3-linux_riscv64.whl
+/root/.cache/pip/wheels/46/13/08/d66f9dc6f40c34aac7798117fba8b1ad26d79513bb86084658/numpy-2.2.5-cp311-cp311-linux_riscv64.whl
+/root/.cache/pip/wheels/02/bc/f2/ad34347005242bda2343c81a0fc1ab4f44c5311f8d95c0e26b/pyyaml-6.0.2-cp311-cp311-linux_riscv64.whl
+/root/.cache/pip/wheels/04/67/73/d6174de8ad751cfe8c9f3bde5ce2e380df3747f34aecad5482/cffi-1.17.1-cp311-cp311-linux_riscv64.whl
+/root/.cache/pip/wheels/f3/ff/83/4da306ed00f7693fddee5a6ad63b613323cd3df5a96ca7982a/patchelf-0.17.2.2-py3-none-linux_riscv64.whl
+/root/.cache/pip/wheels/5b/3a/bc/7778426961fe5866cb7fd6351f6d0d43aea7cd9d850e7207ba/ninja-1.11.1.4-py3-none-linux_riscv64.whl
+/root/.cache/pip/wheels/30/4c/d5/ca5ca80d6ed025c68297f22cc66afc8b9cf19542e8996531df/pylibmc-1.6.3-cp311-cp311-linux_riscv64.whl
+/root/.cache/pip/wheels/5e/4e/8a/b085e41fe066c4096aa0780b5fd2501484271fe9b8e1ee1cf3/maxminddb-2.7.0-cp311-cp311-linux_riscv64.whl
+```
 
 然后就可以开始跑测试了
 
