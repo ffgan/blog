@@ -1,0 +1,1 @@
+# django-5.2 适配 riscv64 环境

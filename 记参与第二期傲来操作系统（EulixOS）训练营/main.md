@@ -47,12 +47,52 @@ bootloader实现的很通俗易懂，主要是开辟一个堆栈给C，这时候
 视频倒是不急着看。先做做任务。导学部分的任务比较简单。没太有时间更新本篇blog。
 直接贴gitee仓库，有兴趣可以看看
 
-https://gitee.com/emt_486/2025-exercises-stage-0
+<https://gitee.com/emt_486/2025-exercises-stage-0>
 
 ### 2. 基础阶段
 
-https://gitee.com/emt_486/2025-exercises-stage-1
+<https://gitee.com/emt_486/2025-exercises-stage-1>
 
 ### 3. 进阶阶段
 
-https://gitee.com/emt_486/2025-exercises-stage-2
+<https://gitee.com/emt_486/2025-exercises-stage-2>
+
+### 4. 项目阶段
+
+![](images/1747285285835_image.png)
+
+前端交互、监控与日志、网络插件、分布式存储与数据管理
+
+![alt text](images/1747285384610_image.png)
+
+![alt text](images/1747285478901_image.png)
+
+里面可以看到几个老熟人了，Django、MinIO，就先从老熟人下手吧，单独开两篇在同一目录下的blog来分别记录适配到riscv平台的过程。
+
+下面的话先记录搭建本地环境的过程。
+
+首先是安装qemu
+
+```shell
+sudo dnf install qemu -y
+```
+
+然后需要跑去下载openEuler的官方虚拟机，
+![alt text](images/1747299256295_image.png)
+
+下载图里400多m的那个，下载完后解压得到qcow2格式的qemu虚拟机。这里为了方便，用了用Virtual Machine Manager这个GUI软件来拉虚拟机起来。具体就不多说了，把那个qcow2拷到/var/lib/libvirt/images下面，然后点几下就可以拉起来了。
+
+![alt text](images/1747299956904_image.png)
+
+记得选择架构为riscv64，操作系统的话目前不支持显示openeular，选择linux2024即可
+
+```shell
+user:     root
+password: openEuler12#$
+```
+
+![alt text](images/1747300198473_image.png)
+
+由于VMM自带终端界面太难用，使用ssh进去。这步比较简单，就不展开了。
+
+基础环境算是配好了，现在来适配第一个熟人 ----> django 。请移步 [此处](./django_5.2_riscv.md)
