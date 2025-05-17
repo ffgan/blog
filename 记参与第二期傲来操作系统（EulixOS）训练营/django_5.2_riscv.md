@@ -293,3 +293,158 @@ dnf install libjpeg-devel cargo -y
 ![alt text](images/1747324902537_image.png)
 
 跑了快一个小时，4G内存吃完了就不动了。把主机内存全给他吃吧。
+
+卡着不动的具体表现是如下图，python3陷入了sleep，但是等待许久依旧不动。
+
+![alt text](images/1747366245367_image.png)
+
+和死锁差不多了。看到这里我想起一个笑话，说chromium的开发者都人均64G内存的开发机，所以压根感受不出来小内存情况下chrome存在的内存占用问题。咱们当然没有这么富裕的内存，首先尝试开一下swap，开个8G看看效果。
+
+参考此处，[链接](https://zhuanlan.zhihu.com/p/106327686)
+```shell
+dd if=/dev/zero of=/swapfile count=8192 bs=1M
+chmod 600 /swapfile
+mkswap /swapfile
+swapon /swapfile
+
+# 在/etc/fstab的最后一行添加这个
+# /swapfile none swap sw 0 0
+```
+
+初次跑完了test，结果如下
+```plain
+Ran 18004 tests in 2849.646s
+
+FAILED (failures=3, skipped=1298, expected failures=5)
+```
+具体是以下三个挂了
+```plain
+FAIL: test_permissions_error (template_tests.test_loaders.FileSystemLoaderTests.test_permissions_error)
+----------------------------------------------------------------------
+AssertionError: PermissionError not raised
+======================================================================
+FAIL: test_readonly_root (file_uploads.tests.DirectoryCreationTests.test_readonly_root)
+Permission errors are not swallowed
+----------------------------------------------------------------------
+AssertionError: PermissionError not raised
+======================================================================
+FAIL: test_no_write_access (i18n.test_compilation.PoFileTests.test_no_write_access)
+----------------------------------------------------------------------
+AssertionError: CommandError not raised
+```
+
+初步判断可能是因为我用root用户来跑的，改用一个普通用户跑跑看。跑一次2800多s，太耗时了。
+
+
+```plain
+FAIL: test_strip_tags_files (utils_tests.test_html.TestUtilsHtml.test_strip_tags_files) [<object object at 0x3f752c0a20>] (filename='strip_tags1.html')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/usr/lib64/python3.11/unittest/case.py", line 57, in testPartExecutor
+    yield
+  File "/usr/lib64/python3.11/unittest/case.py", line 538, in subTest
+    yield
+  File "/home/emt/django/tests/utils_tests/test_html.py", line 171, in test_strip_tags_files
+    self.assertEqual(elapsed.seconds, 0)
+    ^^^^^^^^^^^^^^^^^
+  File "/usr/lib64/python3.11/unittest/case.py", line 873, in assertEqual
+    assertion_func(first, second, msg=msg)
+    ^^^^^^^^^^^^^^^^^
+  File "/usr/lib64/python3.11/unittest/case.py", line 866, in _baseAssertEqual
+    raise self.failureException(msg)
+    ^^^^^^^^^^^^^^^^^
+AssertionError: 1 != 0
+
+----------------------------------------------------------------------
+Ran 18004 tests in 2634.286s
+
+FAILED (failures=1, skipped=1298, expected failures=5)
+```
+去看了一下源码，具体是下面这里
+```python
+def test_strip_tags_files(self):
+    # Test with more lengthy content (also catching performance regressions)
+    for filename in ("strip_tags1.html", "strip_tags2.txt"):
+        with self.subTest(filename=filename):
+            path = os.path.join(os.path.dirname(__file__), "files", filename)
+            with open(path) as fp:
+                content = fp.read()
+                start = datetime.now()
+                stripped = strip_tags(content)
+                elapsed = datetime.now() - start
+            self.assertEqual(elapsed.seconds, 0)
+            self.assertIn("Test string that has not been stripped.", stripped)
+            self.assertNotIn("<", stripped)
+```
+这两都是长文本，解析耗时超过1s了，所以导致抛出了异常。估计和我的机子也有点关系，CPU是AMD的5600G，按说不算太古老，我猜测可能的原因有两，一是虚拟机本身IO上不来，性能也有所损耗，二是我开了swap，缺页太多可能导致性能下降较为严重。主要是后者，不过这个问题不大，都用django了，性能下去一点是正常现象。
+
+咱们来重新指定这个FAIL的测试再跑一次，看看结果如何，就暂时不跑全量的。
+
+```shell
+python3 runtests.py utils_tests
+
+# 结果如下
+# Ran 638 tests in 13.252s
+# 
+# OK (skipped=20)
+
+```
+
+成功通过，说明只是个偶然的性能问题。我又多跑了3次，均没有问题。那么现在就需要来处理最棘手的一部分内容了。skipped部分的测试，skip不意味着测试通过，只是意味着跳过。
+
+> While Django's test suite is running, you'll see a stream of characters
+representing the status of each test as it completes. ``E`` indicates that an
+error was raised during a test, and ``F`` indicates that a test's assertions
+failed. Both of these are considered to be test failures. Meanwhile, ``x`` and
+``s`` indicated expected failures and skipped tests, respectively. Dots indicate
+passing tests.
+> 
+> Skipped tests are typically due to missing external libraries required to run
+the test; see :ref:`running-unit-tests-dependencies` for a list of dependencies
+and be sure to install any for tests related to the changes you are making (we
+won't need any for this tutorial). Some tests are specific to a particular
+database backend and will be skipped if not testing with that backend. SQLite
+is the database backend for the default settings. To run the tests using a
+different backend, see :ref:`running-unit-tests-settings`.
+
+从我们上面几次的结果可以看到，skip的还是挺多的，我们可以细细琢磨一下那些skip的。django官方说tests应当是全部pass。我们这次适配的目标的话就争取尽可能达成该目标。
+
+首先我们按照上面提到的，有一个全部依赖，我们去装一下全部依赖，然后再来一次全量测试。具体的django给出的python包依赖在[这里](https://docs.djangoproject.com/en/5.2/internals/contributing/writing-code/unit-tests/#running-all-the-tests)。
+
+主要有以下几个
+
+1. tests/requirements/py3.txt
+2. 如果您想测试 memcached 或 Redis 缓存后端，您还需要CACHES分别定义指向 memcached 或 Redis 实例的设置。
+2. 要运行 GeoDjango 测试，您需要设置空间数据库并安装地理空间库。
+4. 要运行一些自动重新加载测试，您需要安装 Watchman 服务。
+
+这些依赖项都是可选的。如果缺少任何一个，相关的测试将被跳过。
+
+上面这些内容来自django官网。我们已经达成了1.接下来折腾一下2、3、4。
+
+首先搞一个memcached，
+
+```shell
+dnf install memcached -y
+systemctl enable --now memcached
+```
+
+然后去配置一下使得跑测试的时候能用上我们的memcached。在`tests/test_sqlite.py`里加上这个
+```python
+CACHES = {
+    "default": {
+        "BACKEND": "django.core.cache.backends.memcached.PyMemcacheCache",
+        "LOCATION": "127.0.0.1:11211",
+    }
+}
+```
+
+图数据库安装看起来比较麻烦，留到最后再看看。现在来直接配置一下Watchman。
+
+![alt text](images/1747473344628_image.png)
+
+有点搞，说fedora官方的Watchman过老。那我们简单手动操作一下，后续再写脚本一键起来。下载解压运行，报错。watchman官方给出来的包只有x86-64的。而watchman本身是多语言混合写的，在RV上编译的话工作量还是不小的，暂且搁置吧。
+
+先试试在添加了memcached的情况下，skip数量是否会减少。
+
+
