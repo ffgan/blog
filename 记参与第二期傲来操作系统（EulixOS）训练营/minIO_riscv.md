@@ -19,9 +19,11 @@ minIO RELEASE.2025-04-22T22-12-26Z，Github Repo -> [链接](https://github.com/
 所以对于在github上的开源项目，如果想查看他的构建流程，可以优先去看看项目根目录下是否有一个.github文件夹，这里会配置对应的CI脚本。对于minIO来说，也使用github action。细心找找，可以看到在[这里](https://github.com/minio/minio/blob/master/.github/workflows/go-cross.yml)。
 核心在于最后的一句`make crosscompile`，在往上找找到Makefile里面的crosscompile，可以看到
 
+```make
 crosscompile:
  ## cross compile minio
 	@(env bash $(PWD)/buildscripts/cross-compile.sh)
+```
 
 再顺藤摸瓜，可以看到里面的交叉编译脚本，[链接](https://github.com/minio/minio/blob/master/buildscripts/cross-compile.sh)
 
