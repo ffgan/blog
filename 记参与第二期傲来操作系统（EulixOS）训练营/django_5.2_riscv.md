@@ -301,6 +301,7 @@ dnf install libjpeg-devel cargo -y
 和死锁差不多了。看到这里我想起一个笑话，说chromium的开发者都人均64G内存的开发机，所以压根感受不出来小内存情况下chrome存在的内存占用问题。咱们当然没有这么富裕的内存，首先尝试开一下swap，开个8G看看效果。
 
 参考此处，[链接](https://zhuanlan.zhihu.com/p/106327686)
+
 ```shell
 dd if=/dev/zero of=/swapfile count=8192 bs=1M
 chmod 600 /swapfile
@@ -312,12 +313,15 @@ swapon /swapfile
 ```
 
 初次跑完了test，结果如下
+
 ```plain
 Ran 18004 tests in 2849.646s
 
 FAILED (failures=3, skipped=1298, expected failures=5)
 ```
+
 具体是以下三个挂了
+
 ```plain
 FAIL: test_permissions_error (template_tests.test_loaders.FileSystemLoaderTests.test_permissions_error)
 ----------------------------------------------------------------------
@@ -334,7 +338,6 @@ AssertionError: CommandError not raised
 ```
 
 初步判断可能是因为我用root用户来跑的，改用一个普通用户跑跑看。跑一次2800多s，太耗时了。
-
 
 ```plain
 FAIL: test_strip_tags_files (utils_tests.test_html.TestUtilsHtml.test_strip_tags_files) [<object object at 0x3f752c0a20>] (filename='strip_tags1.html')
@@ -360,7 +363,9 @@ Ran 18004 tests in 2634.286s
 
 FAILED (failures=1, skipped=1298, expected failures=5)
 ```
+
 去看了一下源码，具体是下面这里
+
 ```python
 def test_strip_tags_files(self):
     # Test with more lengthy content (also catching performance regressions)
@@ -376,6 +381,7 @@ def test_strip_tags_files(self):
             self.assertIn("Test string that has not been stripped.", stripped)
             self.assertNotIn("<", stripped)
 ```
+
 这两都是长文本，解析耗时超过1s了，所以导致抛出了异常。估计和我的机子也有点关系，CPU是AMD的5600G，按说不算太古老，我猜测可能的原因有两，一是虚拟机本身IO上不来，性能也有所损耗，二是我开了swap，缺页太多可能导致性能下降较为严重。主要是后者，不过这个问题不大，都用django了，性能下去一点是正常现象。
 
 咱们来重新指定这个FAIL的测试再跑一次，看看结果如何，就暂时不跑全量的。
@@ -398,7 +404,7 @@ error was raised during a test, and ``F`` indicates that a test's assertions
 failed. Both of these are considered to be test failures. Meanwhile, ``x`` and
 ``s`` indicated expected failures and skipped tests, respectively. Dots indicate
 passing tests.
-> 
+>
 > Skipped tests are typically due to missing external libraries required to run
 the test; see :ref:`running-unit-tests-dependencies` for a list of dependencies
 and be sure to install any for tests related to the changes you are making (we
@@ -430,6 +436,7 @@ systemctl enable --now memcached
 ```
 
 然后去配置一下使得跑测试的时候能用上我们的memcached。在`tests/test_sqlite.py`里加上这个
+
 ```python
 CACHES = {
     "default": {
@@ -447,4 +454,28 @@ CACHES = {
 
 先试试在添加了memcached的情况下，skip数量是否会减少。
 
+```plain
+Ran 18004 tests in 3061.033s
 
+FAILED (failures=2, skipped=1240, expected failures=5)
+```
+
+skipped的稍微减少了一点。但大部分并没有减少。（挂的这两个是因为时间问题，修正一下时间重跑就能过了）
+
+重跑一遍，需要事先把测试结果保存下来。翻看了半天的runtests.py没太找着保存结果的参数配置，干脆收集命令行全部输出得了。
+
+```python
+python3 runtests.py --keepdb -v 2 &> testoutput.txt
+```
+
+通过对结果的初步分析，可以看到大部分是针对某些特定数据库的测试样例，比如针对pgsql、oracel的，还有的是针对浏览器需要浏览器来进行测试的，由于我是跑在虚拟机里面的，为其配备浏览器的操作过于复杂，暂且可以搁置。
+
+此时跑去看github action上，django正常情况下的测试结果。
+
+<https://github.com/django/django/actions/workflows/tests.yml>
+
+下载最近的运行测试的结果，发现正常情况下也没有配置额外的数据库，都是用sqlite来跑，skipp大概也都在1400左右，说明django在RV的测试基本上算是通过的。
+
+## 适配结论
+
+在RV环境下，django 5.2不需要做出额外的修改，pip install django即可开箱即用。即使是在RV环境下，从源码开始构建出的whl也能正常工作，和x86、arm下运行的测试结果无差异。主要原因为django为纯python实现，指令集架构这些底层的细节对于django来说是透明，django直接面向的是python解释器，如果需要利用RV的特殊指令集来对django做加速之类的操作，可能会不太好合入django项目。
