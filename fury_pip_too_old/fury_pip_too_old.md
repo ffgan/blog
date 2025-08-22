@@ -1,8 +1,12 @@
-# 记使用apache Fury打包pypi踩坑流程
+# 记使用Apache Fury打包pypi踩坑流程
 
-目前主流前后端交互多是用JSON，可读性比xml高很多，但是序列化性能适中，体积占用也大。MongoDB有个bson格式，能减少json体积，二进制形式，无可读性。google有个Protobuf在grpc中用的多，性能和体积都比json好，要写个.proto文件也就是schema规定一下传输格式。对于跨语言来说是挺大的优势，显式比隐式好，按照规范来接入对交互性来说是极为有利的。
+目前主流前后端交互多是用JSON，可读性比XML高很多，但是序列化性能适中，体积占用也大。MongoDB有个[BSON](https://www.mongodb.com/resources/basics/json-and-bson)格式也能用来表示数据，能减少JSON体积，二进制形式，无可读性(虽然说我们一般也不会直接操作和查看BSON格式的数据，都是走MongoDB或者GUI软件来查看)。Google有个[Protobuf](https://protobuf.dev/)在gRPC中用的多，性能和体积都比JSON好，要写个.proto文件也就是schema规定一下传输格式。
 
-Fury在序列化、反序列化的速度都比Protobuf好，体积还更小，所以选用它也自然而然。同时支持跨语言序列化（文档里写了一句 [跨语言序列化并不稳定，请勿在生产环境中使用。](https://fury.apache.org/zh-CN/docs/guide/xlang_type_mapping)），Fury本身是Java写的，可以替换jdk自带的序列化包，跨语言支持Python/C++/Golang/Javascript/Rust，当然对Java支持是最好的。Go的话拉源码下来直接导入用没啥大问题。Python是pip拉下来的，官方示例有些小瑕疵但不影响（如果有空的话不知道能不能发PR修一下）。Fury的pip包不支持win，这点在pip包里挺常见的。
+显式规定传输的数据结构对于跨语言交互来说是挺大的优势，其中比较有用的一点就是自动生成代码。
+
+[Fury](https://fory.apache.org/)(现在改名了，叫fory好像，[改名公告](https://fory.apache.org/blog/fury_renamed_to_fory/))在序列化、反序列化的速度都比Protobuf好，体积还更小，所以选用它也自然而然。fury自然也是支持跨语言序列化（文档里写了一句 [跨语言序列化并不稳定，请勿在生产环境中使用。](https://fury.apache.org/zh-CN/docs/guide/xlang_type_mapping)）。
+
+Fury本身是Java写的，可以替换jdk自带的序列化包，跨语言支持Python/C++/Golang/Javascript/Rust，当然对Java支持是最好的。Go的话拉源码下来直接导入用没啥大问题。Python是pip拉下来的，官方示例有些小瑕疵但不影响（如果有空的话不知道能不能发PR修一下）。Fury的pip包不支持win，这点在pip包里挺常见的。
 
 比较简单的测试当然是序列化完存到文件里，再读取文件来反序列化。按官方demo跑，Go和Python不跨语言都可以，于是便想尝试一下跨语言调用，也就是Python/Go写然后另一个读。果不其然，的确不稳定，跑不起来。
 
