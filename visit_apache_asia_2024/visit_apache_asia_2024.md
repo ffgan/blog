@@ -66,3 +66,5 @@ ASF比较出名的一个项目是一个叫httpd的HTTP服务器（LAMP当中的A
 3. [一位工程师在 Apache 坚持且热爱的开源之旅](https://www.youtube.com/watch?v=CMAyGhb0mpA&list=PLU2OcwpQkYCw-J71WjgmeD9BYOK67xjG2)
 4. [非技术人在开源社区的成长](https://www.youtube.com/watch?v=tiQmFBE_H_o&list=PLU2OcwpQkYCw-J71WjgmeD9BYOK67xjG2)
 5. 闪电演讲
+
+此处是应该写点什么的，但是我发现我对开源也仅限于了解而不是有过丰富的实践，就算了，待到以后再来补充了。
