@@ -113,6 +113,7 @@ openeuler的这个qemu虚拟机时间不太对，可以这样来调整,
 
 ```shell
 timedatectl set-timezone "Asia/Shanghai" # 改时区
+timedatectl set-time "2025-08-23 22:30:00" # 设置为最近的一个时间
 dnf install chrony -y
 systemctl start chronyd
 chronyc makestep # 显示200即可同步时间
