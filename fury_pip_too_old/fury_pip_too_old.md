@@ -1,12 +1,12 @@
 # 记使用Apache Fury打包pypi踩坑流程
 
-目前主流前后端交互多是用JSON，可读性比XML高很多，但是序列化性能适中，体积占用也大。MongoDB有个[BSON](https://www.mongodb.com/resources/basics/json-and-bson)格式也能用来表示数据，能减少JSON体积，二进制形式，无可读性(虽然说我们一般也不会直接操作和查看BSON格式的数据，都是走MongoDB或者GUI软件来查看)。Google有个[Protobuf](https://protobuf.dev/)在gRPC中用的多，性能和体积都比JSON好，要写个.proto文件也就是schema规定一下传输格式。
+目前主流前后端交互多是用JSON，可读性比XML高很多，但是序列化性能适中，体积占用也大，比较影响使用的是不支持注释。MongoDB有个[BSON](https://www.mongodb.com/resources/basics/json-and-bson)格式也能用来表示数据，能减少JSON体积，二进制形式，无可读性(虽然说我们一般也不会直接操作和查看BSON格式的数据，都是走MongoDB或者GUI软件来查看)。Google有个[Protobuf](https://protobuf.dev/)在gRPC中用的多，性能和体积都比JSON好，要写个.proto文件也就是schema规定一下传输格式。
 
-显式规定传输的数据结构对于跨语言交互来说是挺大的优势，其中比较有用的一点就是自动生成代码。
+显式规定传输的数据结构对于跨语言交互来说是挺大的优势，其中比较有用的一点就是自动生成代码，可以直接用于import之类的。
 
 [Fury](https://fory.apache.org/)(现在改名了，叫fory好像，[改名公告](https://fory.apache.org/blog/fury_renamed_to_fory/))在序列化、反序列化的速度都比Protobuf好，体积还更小，所以选用它也自然而然。fury自然也是支持跨语言序列化（文档里写了一句 [跨语言序列化并不稳定，请勿在生产环境中使用。](https://fury.apache.org/zh-CN/docs/guide/xlang_type_mapping)）。
 
-Fury本身是Java写的，可以替换jdk自带的序列化包，跨语言支持Python/C++/Golang/Javascript/Rust，当然对Java支持是最好的。Go的话拉源码下来直接导入用没啥大问题。Python是pip拉下来的，官方示例有些小瑕疵但不影响（如果有空的话不知道能不能发PR修一下）。Fury的pip包不支持win，这点在pip包里挺常见的。
+Fury本身是Java写的，可以替换JDK自带的序列化包，跨语言支持Python/C++/Golang/Javascript/Rust，当然对Java支持是最好的。Go的话拉源码下来直接导入用没啥大问题。Python是pip拉下来的，官方示例有些小瑕疵但不影响（如果有空的话不知道能不能发PR修一下）。Fury的pip包不支持win，这点在pip包里挺常见的。
 
 比较简单的测试当然是序列化完存到文件里，再读取文件来反序列化。按官方demo跑，Go和Python不跨语言都可以，于是便想尝试一下跨语言调用，也就是Python/Go写然后另一个读。果不其然，的确不稳定，跑不起来。
 
@@ -68,4 +68,6 @@ python setup.py bdist_wheel --dist-dir=./dist
 
 再装上。
 
-美滋滋Fury跨语言调用。
+更一般来说，这样打包出来的wheel其实有待进行更多的测试。以及需要考虑一下对于兼容性的问题。测试没什么好说的，单测、集成测试、系统测试，有精力的话就都上一遍，最不济上一下单测也行。Python这边一般用[tox](https://tox.wiki/en/latest/)来在CI中跑测试的比较多，预先在容器里装好Python3.8-3.14之类的，然后在容器里跑tox。
+
+对于兼容性的考虑，这点其实是有pep规范的，感兴趣的可以看看这个[仓库](https://github.com/pypa/manylinux)。如果是纯Python代码，那全平台都可以，对应就是上图那个x86_64换成any，只要CPython解释支持的平台，纯Python代码打包出来的wheel就能直接用，即能通过`pip install xx` 来使用。而如果夹杂了其他语言，则需要另说，一般的话C/C++、Cython的都可以考虑使用 [cibuildwheel](https://github.com/pypa/cibuildwheel) 来进行打包，rust的话可以考虑 [maturin](https://github.com/PyO3/maturin) 。现在的话有了 [uv](https://github.com/astral-sh/uv) , 无论是build还是publish，直接`uv build` 或者 `uv publish` 就可以，都挺方便的。
