@@ -58,13 +58,13 @@ inode中有个关键变量来表示链接数，[i_nlinks](https://github.com/tor
 以下可以简单来看看其用法
 
 ```shell
-➜  ~ ln hello.txt hello1.txt                                                                                                                                                                                                                
-➜  ~ ls -il                                                                                                                                                                                                                                 
+➜  ~ ln hello.txt hello1.txt
+➜  ~ ls -il        
 total 4
    8206 -rw-------. 1 root root 448 Nov 19 19:26 anaconda-ks.cfg
 1234056 -rw-r--r--. 2 root root   0 Apr 16 23:11 hello1.txt
 1234056 -rw-r--r--. 2 root root   0 Apr 16 23:11 hello.txt
-➜  ~ stat hello1.txt                                                                                                                                                                                                                        
+➜  ~ stat hello1.txt
   File: hello1.txt
   Size: 0               Blocks: 0          IO Block: 4096   regular empty file
 Device: 0,36    Inode: 1234056     Links: 2
@@ -83,13 +83,13 @@ Change: 2025-04-17 15:07:44.512881384 +0800
 下面是一个跨目录创建硬链接的示例
 
 ```shell
-➜  ~ mkdir tmp                                                                                                                                                                                                                              
-➜  ~ cd tmp                                                                                                                                                                                                                                 
-➜  tmp ln ../hello.txt hello2.txt                                                                                                                                                                                                           
-➜  tmp ls -li                                                                                                                                                                                                                               
+➜  ~ mkdir tmp                                                                    
+➜  ~ cd tmp                                  
+➜  tmp ln ../hello.txt hello2.txt                        
+➜  tmp ls -li                                                
 total 0
 1234056 -rw-r--r--. 3 root root 0 Apr 16 23:11 hello2.txt
-➜  tmp stat hello2.txt                                                                                                                                                                                                                      
+➜  tmp stat hello2.txt                              
   File: hello2.txt
   Size: 0               Blocks: 0          IO Block: 4096   regular empty file
 Device: 0,36    Inode: 1234056     Links: 3
@@ -136,14 +136,14 @@ Change: 2025-04-17 15:19:30.862800277 +0800
 通过`ln -s source_file target_file`即可创建软链接。
 
 ```shell
-➜  tmp ls                                                                                                                                                                                                                                   
+➜  tmp ls                                       
 hello2.txt
-➜  tmp ln -s hello2.txt hello3.txt                                                                                                                                                                                                          
-➜  tmp ls -il                                                                                                                                                                                                                               
+➜  tmp ln -s hello2.txt hello3.txt                             
+➜  tmp ls -il                                      
 total 4
 1234056 -rw-r--r--. 3 root root  0 Apr 16 23:11 hello2.txt
 1234942 lrwxrwxrwx. 1 root root 10 Apr 17 16:17 hello3.txt -> hello2.txt
-➜  tmp stat hello3.txt                                                                                                                                                                                                                      
+➜  tmp stat hello3.txt                     
   File: hello3.txt -> hello2.txt
   Size: 10              Blocks: 8          IO Block: 4096   symbolic link
 Device: 0,36    Inode: 1234942     Links: 1
@@ -180,7 +180,10 @@ Change: 2025-04-17 15:19:30.862800277 +0800
 
 下面来说说我之前看到过的一些相关的有意思的新闻，内容会比较散，可以跳过不读。
 
-1. [fedora的一个提案，统一/usr/bin和/usr/sbin，这个arch好像早就统一了](https://fedoraproject.org/wiki/Changes/Unify_bin_and_sbin)
+### 1. 统一/usr/bin和/usr/sbin
+
+ [fedora的一个提案，这个arch好像早就统一了](https://fedoraproject.org/wiki/Changes/Unify_bin_and_sbin)
+ 
 ![alt text](images/1744942913297_image.png)
 
 目前来看还没合。
