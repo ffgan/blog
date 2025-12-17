@@ -95,7 +95,7 @@
 
 首先贴出一张**来自标准里**介绍这个算法的图，一图胜千言
 
-![alt text](images/1745675941997_image.png)
+![alt text](https://8.219.13.0/download/遇事不决/1745675941997_image.png)
 
 首先Alice生成一对用于封装和解封装的密钥对，简称ek、dk，其实分别是公钥、私钥。ek可以分发给Bob或者其他想要执行密钥封装的对象。dk则Alice自己持有。
 
@@ -115,10 +115,10 @@ Go官方的ml-kem库给了一个[example](https://pkg.go.dev/crypto/mlkem#pkg-ov
 
 先来看看整体的最外层，密钥生成自然不需要任何输入，输出有ek和dk。ek对外公布，dk保密。
 
-![alt text](images/1745732659060_image.png)
+![alt text](https://8.219.13.0/download/遇事不决/1745732659060_image.png)
 
 图里的k和ml-kem的参数有关
-![alt text](images/1745737009490_image.png)
+![alt text](https://8.219.13.0/download/遇事不决/1745737009490_image.png)
 
 首先是生成两个随机数𝑑和𝑧，都是32字节的。生成随机数后将两者作为参数传入 ML-KEM.KeyGen_internal 。返回得到(ek,dk)二元组。
 
