@@ -31,7 +31,7 @@ crosscompile:
 
 首先需要安装Go,`dnf install go -y`。
 
-![alt text](images/1747642341351_image.png)
+![alt text](https://8.219.13.0/download/%E8%AE%B0%E5%8F%82%E4%B8%8E%E7%AC%AC%E4%BA%8C%E6%9C%9F%E5%82%B2%E6%9D%A5%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%EF%BC%88EulixOS%EF%BC%89%E8%AE%AD%E7%BB%83%E8%90%A5/1747642341351_image.png)
 
 注意到安装的Go版本为1.21.4。这里有个坑，昨天去琢磨过Go的交叉编译，说高版本后官方编译器的向前兼容只支持最近的两版本，比如1.24的话最好是1.22及以上，太老的版本官方不支持。（Go一年发两版本，LTS最长可以看作只有1年。）。在编译前我们需要看看怎么把需要的依赖给配置好。
 

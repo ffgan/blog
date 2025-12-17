@@ -2,7 +2,7 @@
 
 需要先下载图里的这两
 
-![alt text](images/1748000307072_image.png)
+![alt text](https://8.219.13.0/download/%E8%AE%B0%E5%8F%82%E4%B8%8E%E7%AC%AC%E4%BA%8C%E6%9C%9F%E5%82%B2%E6%9D%A5%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%EF%BC%88EulixOS%EF%BC%89%E8%AE%AD%E7%BB%83%E8%90%A5/1748000307072_image.png)
 
 <https://dl-cdn.openeuler.openatom.cn/openEuler-24.03-LTS/virtual_machine_img/riscv64/>
 

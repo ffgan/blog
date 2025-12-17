@@ -5,10 +5,10 @@
 一个以RISC-V为主的操作系统精简版教程。学习曲线相对平缓。
 
 按照介绍来看，目前是第二期。第二期的主要方向如下
-![alt text](images/1747037019341_image.png)
+![alt text](https://8.219.13.0/download/%E8%AE%B0%E5%8F%82%E4%B8%8E%E7%AC%AC%E4%BA%8C%E6%9C%9F%E5%82%B2%E6%9D%A5%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%EF%BC%88EulixOS%EF%BC%89%E8%AE%AD%E7%BB%83%E8%90%A5/1747037019341_image.png)
 
 其中具体内容如下
-![alt text](images/1747037008836_image.png)
+![alt text](https://8.219.13.0/download/%E8%AE%B0%E5%8F%82%E4%B8%8E%E7%AC%AC%E4%BA%8C%E6%9C%9F%E5%82%B2%E6%9D%A5%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%EF%BC%88EulixOS%EF%BC%89%E8%AE%AD%E7%BB%83%E8%90%A5/1747037008836_image.png)
 
 按照上图里来看，分为了4个阶段，后续就按顺序来操作即可。
 
@@ -19,22 +19,22 @@
 b站视频，直接2倍速起飞看。还是很有意思的，前面主要是计组青春版+OS部分内容+编译原理部分内容。经历过计组用AHDL手搓指令实现，看这个教程就比较友好了。
 
 配置环境的话，实测下来fedora是无法直接交叉编译的。原因如下。
-![alt text](images/1747059281459_image.png)
+![alt text](https://8.219.13.0/download/%E8%AE%B0%E5%8F%82%E4%B8%8E%E7%AC%AC%E4%BA%8C%E6%9C%9F%E5%82%B2%E6%9D%A5%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%EF%BC%88EulixOS%EF%BC%89%E8%AE%AD%E7%BB%83%E8%90%A5/1747059281459_image.png)
 所以如果在x86的fedora用dnf装了gcc-riscv64也跑不了用户程序交叉编译，缺库。
 
 直接使用教程里给出的tool然后配置一下bashrc或者profile就行
 
-![alt text](images/1747059418566_image.png)
+![alt text](https://8.219.13.0/download/%E8%AE%B0%E5%8F%82%E4%B8%8E%E7%AC%AC%E4%BA%8C%E6%9C%9F%E5%82%B2%E6%9D%A5%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%EF%BC%88EulixOS%EF%BC%89%E8%AE%AD%E7%BB%83%E8%90%A5/1747059418566_image.png)
 
 gdb对汇编单步调试，仿佛回到了手搓指令的实验课，这可简直不要太熟悉了。
 
-![alt text](images/1747102473424_image.png)
+![alt text](https://8.219.13.0/download/%E8%AE%B0%E5%8F%82%E4%B8%8E%E7%AC%AC%E4%BA%8C%E6%9C%9F%E5%82%B2%E6%9D%A5%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%EF%BC%88EulixOS%EF%BC%89%E8%AE%AD%E7%BB%83%E8%90%A5/1747102473424_image.png)
 
 这里内容比较多，就不一一介绍。
 
 下图是00-bootstrap启动成功截图，boot完控制权交给内核，此时内核进入一个空转状态。
 
-![alt text](images/1747130930823_image.png)
+![alt text](https://8.219.13.0/download/%E8%AE%B0%E5%8F%82%E4%B8%8E%E7%AC%AC%E4%BA%8C%E6%9C%9F%E5%82%B2%E6%9D%A5%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%EF%BC%88EulixOS%EF%BC%89%E8%AE%AD%E7%BB%83%E8%90%A5/1747130930823_image.png)
 
 bootloader实现的很通俗易懂，主要是开辟一个堆栈给C，这时候C就可以来接管全局了。后续汇编也没有啥出现的必要，毕竟调试汇编和对着机器指令嗯写区别不大，都是地狱级别。
 
@@ -59,13 +59,13 @@ bootloader实现的很通俗易懂，主要是开辟一个堆栈给C，这时候
 
 ### 4. 项目阶段
 
-![](images/1747285285835_image.png)
+![](https://8.219.13.0/download/%E8%AE%B0%E5%8F%82%E4%B8%8E%E7%AC%AC%E4%BA%8C%E6%9C%9F%E5%82%B2%E6%9D%A5%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%EF%BC%88EulixOS%EF%BC%89%E8%AE%AD%E7%BB%83%E8%90%A5/1747285285835_image.png)
 
 前端交互、监控与日志、网络插件、分布式存储与数据管理
 
-![alt text](images/1747285384610_image.png)
+![alt text](https://8.219.13.0/download/%E8%AE%B0%E5%8F%82%E4%B8%8E%E7%AC%AC%E4%BA%8C%E6%9C%9F%E5%82%B2%E6%9D%A5%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%EF%BC%88EulixOS%EF%BC%89%E8%AE%AD%E7%BB%83%E8%90%A5/1747285384610_image.png)
 
-![alt text](images/1747285478901_image.png)
+![alt text](https://8.219.13.0/download/%E8%AE%B0%E5%8F%82%E4%B8%8E%E7%AC%AC%E4%BA%8C%E6%9C%9F%E5%82%B2%E6%9D%A5%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%EF%BC%88EulixOS%EF%BC%89%E8%AE%AD%E7%BB%83%E8%90%A5/1747285478901_image.png)
 
 里面可以看到几个老熟人了，Django、MinIO，就先从老熟人下手吧，单独开两篇在同一目录下的blog来分别记录适配到riscv平台的过程。
 
@@ -78,11 +78,11 @@ sudo dnf install qemu -y
 ```
 
 然后需要跑去下载openEuler的官方虚拟机，
-![alt text](images/1747299256295_image.png)
+![alt text](https://8.219.13.0/download/%E8%AE%B0%E5%8F%82%E4%B8%8E%E7%AC%AC%E4%BA%8C%E6%9C%9F%E5%82%B2%E6%9D%A5%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%EF%BC%88EulixOS%EF%BC%89%E8%AE%AD%E7%BB%83%E8%90%A5/1747299256295_image.png)
 
 下载图里400多m的那个，下载完后解压得到qcow2格式的qemu虚拟机。这里为了方便，用了用Virtual Machine Manager这个GUI软件来拉虚拟机起来。具体就不多说了，把那个qcow2拷到/var/lib/libvirt/images下面，然后点几下就可以拉起来了。
 
-![alt text](images/1747299956904_image.png)
+![alt text](https://8.219.13.0/download/%E8%AE%B0%E5%8F%82%E4%B8%8E%E7%AC%AC%E4%BA%8C%E6%9C%9F%E5%82%B2%E6%9D%A5%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%EF%BC%88EulixOS%EF%BC%89%E8%AE%AD%E7%BB%83%E8%90%A5/1747299956904_image.png)
 
 记得选择架构为riscv64，操作系统的话目前不支持显示openeular，选择linux2024即可
 
@@ -91,7 +91,7 @@ user:     root
 password: openEuler12#$
 ```
 
-![alt text](images/1747300198473_image.png)
+![alt text](https://8.219.13.0/download/%E8%AE%B0%E5%8F%82%E4%B8%8E%E7%AC%AC%E4%BA%8C%E6%9C%9F%E5%82%B2%E6%9D%A5%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%EF%BC%88EulixOS%EF%BC%89%E8%AE%AD%E7%BB%83%E8%90%A5/1747300198473_image.png)
 
 由于VMM自带终端界面太难用，使用ssh进去。这步比较简单，就不展开了。
 
