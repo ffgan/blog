@@ -143,7 +143,6 @@ navigation = [
   {path = "#", title = "Search", is_search = true},
   # {path = "/robot", title = "Robot", is_robot = true},
   # {path = "https://getzola.org/", title = "Zola", is_external = true},
-  {path = "/about", title = "About"},
 ]
 
 show_home_content = true
