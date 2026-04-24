@@ -45,6 +45,18 @@ ASF比较出名的一个项目是一个叫httpd的HTTP服务器（LAMP当中的A
 
 拿门锁拍的，av画质
 
+![ant_group_opensource](https://download.ffgan.com/download/visit_apache_asia_2024/ant_group_opensource.png)
+
+![bytedance_opensource](https://download.ffgan.com/download/visit_apache_asia_2024/bytedance_opensource.png)
+
+![selectdb_opensource](https://download.ffgan.com/download/visit_apache_asia_2024/selectdb_opensource.png)
+
+![openbayes_opensource](https://download.ffgan.com/download/visit_apache_asia_2024/openbayes_opensource.png)
+
+![xiaomi_opensource](https://download.ffgan.com/download/visit_apache_asia_2024/xiaomi_opensource.png)
+
+![aliyun_opensource](https://download.ffgan.com/download/visit_apache_asia_2024/aliyun_opensource.png)
+
 ## 会议日程
 
 在杭州举办，时间为7.26-7.28，每天分为上午和下午，上午是主会场，下午是多个主题多个分会场。
