@@ -159,7 +159,6 @@ home_list_style = "default"
 show_home_social_icons = true
 social_icons = [
   {path = "https://github.com/ffgan", title = "GitHub Account", icon = "github"},
-  {path = "sudoemt@gmail.com", title = "Email", icon = "email"},
   {path = "/atom.xml", title = "RSS", icon = "rss"},
 ]
 taxonomies_desc = []
