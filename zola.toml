@@ -137,7 +137,7 @@ date_format = "%Y-%m-%d"
 show_home_title = true
 home_title = "ffgan' blog"
 navigation = [
-  {path = "/", title = "Archive"},
+  {path = "/archive", title = "Archive"},
   {path = "/tags", title = "Tags"},
   {path = "/categories", title = "Categories"},
   {path = "#", title = "Search", is_search = true},
@@ -152,6 +152,10 @@ home_content = ""
 # If you set this to "", the all the content under "content" will be shown (not recommand)
 # If you set this to "blog", the all the content under "content/blog" will be shown (recommand)
 home_content_dir = "blog"
+# Homepage page size — keep in sync with content/_index.md paginate_by
+home_paginate_by = 5
+# Archive page size (/archive)
+archive_paginate_by = 10
 # [Cela hint] Use "mix" to show subsections as an archieve on home page with collapsible lists
 # TODO fix "" empty string
 home_list_style = "default"
