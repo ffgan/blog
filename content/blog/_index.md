@@ -3,6 +3,6 @@ title = "Blog"
 sort_by = "date"
 # Bubble posts to the homepage so `/` can paginate with paginate_by = 5.
 transparent = true
-# Section page would be empty after bubbling; Archive lives at /archive/.
-render = false
+# Visiting /blog/ redirects home; Archive lives at /archive/.
+redirect_to = "/"
 +++
