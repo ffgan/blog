@@ -138,6 +138,7 @@ show_home_title = true
 home_title = "Keep it simple, stupid"
 home_eyebrow = "Notes"
 navigation = [
+  {path = "/about", title = "About"},
   {path = "/archive", title = "Archive"},
   {path = "/tags", title = "Tags"},
   {path = "/categories", title = "Categories"},
