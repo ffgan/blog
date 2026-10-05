@@ -190,13 +190,13 @@ Change: 2025-04-17 15:19:30.862800277 +0800
 
  [fedora的一个提案，这个arch好像早就统一了](https://fedoraproject.org/wiki/Changes/Unify_bin_and_sbin)
 
-![alt text](https://download.ffgan.com/download/%E7%A1%AC%E3%80%81%E8%BD%AF%E9%93%BE%E6%8E%A5/1744942913297_image.png)
+![alt text](https://img.ffgan.com/%E7%A1%AC%E3%80%81%E8%BD%AF%E9%93%BE%E6%8E%A5/1744942913297_image.png)
 
 目前来看还没合。
 
 不过这里看到/bin和/sbin已经软链接指向了/usr/bin和/usr/sbin
 
-![alt text](https://download.ffgan.com/download/%E7%A1%AC%E3%80%81%E8%BD%AF%E9%93%BE%E6%8E%A5/1744943060675_image.png)
+![alt text](https://img.ffgan.com/%E7%A1%AC%E3%80%81%E8%BD%AF%E9%93%BE%E6%8E%A5/1744943060675_image.png)
 
 ## 7. 参考链接
 

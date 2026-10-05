@@ -1,0 +1,13 @@
+name = "zola-blog"
+pages_build_output_dir = "./public"
+
+# Pages v2/v3 ships Zola 0.22.1 and does not read .zola-version.
+# Cela's templates need the version pinned below.
+[vars]
+ZOLA_VERSION = "0.23.4"
+
+[env.production.vars]
+ZOLA_VERSION = "0.23.4"
+
+[env.preview.vars]
+ZOLA_VERSION = "0.23.4"
