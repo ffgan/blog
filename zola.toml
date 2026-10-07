@@ -146,7 +146,6 @@ navigation = [
   {path = "/about", title = "关于"},
   {path = "/archive", title = "归档"},
   {path = "/tags", title = "标签"},
-  {path = "/categories", title = "分类"},
   {path = "#", title = "搜索", is_search = true},
   # {path = "/robot", title = "Robot", is_robot = true},
   # {path = "https://getzola.org/", title = "Zola", is_external = true},
@@ -185,9 +184,12 @@ taxonomies_tail = [
 # if your blog source is public, cela will try to find the orinal page with its relative path
 # edit_post_url = "mailto:your-username@gmail.com"
 edit_post_url = "https://github.com/ffgan/blog/tree/master/"
+edit_post_label = "建议修改"
 show_cela_logo = true
 show_code_copy_buttons = true
+show_card_categories = true
 show_header_title = false
+show_post_author = false
 show_post_edit_button = true
 show_post_meta = true
 show_post_nav_links = true
@@ -196,11 +198,11 @@ show_reading_time = true
 card_hover_border = false
 show_scroll_to_top = true
 show_taxonomies_description = true
-show_taxonomies_tail = true
+show_taxonomies_tail = false
 show_theme_toggle = true
 show_toc = true
 unfold_toc = false
-show_word_count = true
+show_word_count = false
 
 # [Cela hint] Cela will use this for search page title (default is "Search" if not set)
 search_title = "搜索"
@@ -218,7 +220,7 @@ remember_choice = true
 # Whether to show the original title defined in base configure
 title_show = true
 # Title prefix/delimiter before page or section title
-title_prefix = "🌟"
+title_prefix = ""
 # Value of the HTML dir attribute (ltr, rtl, or auto)
 i18n_dir = "ltr"
 
