@@ -3,14 +3,15 @@
 base_url = "https://blog.ffgan.com/"
 
 # The site title and description; used in feeds by default.
-title = "ffgan' blog"
-description = ""
+title = "ffgan's blog"
+description = "ffgan 的笔记，记录 Linux、RISC-V、容器、开源，以及偶尔的旅行。"
 
 # The default author for pages
 author = "ffgan"
 
-# The default language; used in feeds.
-# [Cela hint] Html lang default setting
+# Zola builds its search index with elasticlunr, which has no Chinese stemmer.
+# The search page scans the stored title and body, so this can stay "en".
+# The document language visitors see is extra.cela.html_lang.
 default_language = "en"
 
 # The site theme to use.
@@ -124,12 +125,14 @@ toc_open = false
 enable_mathjax = true
 
 [extra.cela]
+# <html lang>. Not default_language: that value has to be an elasticlunr language.
+html_lang = "zh-CN"
 # The template title (shown in home page )
-default_keywords = ["Rust zola blog", "cela theme"]
+default_keywords = ["Linux", "RISC-V", "开源", "ffgan"]
 favicon = "favicon.ico"
 favicon16x16 = "favicon-16x16.png"
 favicon32x32 = "favicon-32x32.png"
-header_title = "ffgan' blog"
+header_title = "ffgan's blog"
 icon = "svg/cela_new_small_rec.svg"
 icon_dark = "svg/cela_new_small_rec.svg"
 
@@ -154,7 +157,7 @@ home_content = ""
 # If you set this to "", the all the content under "content" will be shown (not recommand)
 # If you set this to "blog", the all the content under "content/blog" will be shown (recommand)
 home_content_dir = "blog"
-# Homepage page size — keep in sync with content/_index.md paginate_by
+# Client-side fallback page size. The homepage itself uses paginate_by in content/_index.md.
 home_paginate_by = 5
 # Archive page size (/archive)
 archive_paginate_by = 10
@@ -198,9 +201,9 @@ unfold_toc = false
 show_word_count = true
 
 # [Cela hint] Cela will use this for search page title (default is "Search" if not set)
-search_title = "From Config: Search"
+search_title = "Search"
 # [Cela hint] Cela will use this for search page description (default is "Find posts by title or body content" if not set)
-search_description = "From Config: Find posts by title or body content"
+search_description = "按标题或正文查找文章"
 
 [extra.cela.color]
 
@@ -214,8 +217,8 @@ remember_choice = true
 title_show = true
 # Title prefix/delimiter before page or section title
 title_prefix = "🌟"
-# The internationalization directory for multi-language support
-i18n_dir = "i18n_dir"
+# Value of the HTML dir attribute (ltr, rtl, or auto)
+i18n_dir = "auto"
 
 # # TODO
 # # Whether to load social icons (default = true)

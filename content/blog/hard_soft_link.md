@@ -1,8 +1,9 @@
 +++
 title = "软链接与硬链接"
-date = 2025-03-14
+date = 2025-04-18
+description = "从 inode 讲起，说明软链接和硬链接差在哪里，以及在 Linux 里各自适合什么情况。"
 [taxonomies]
-tags = ["Link"]
+tags = ["symlink"]
 categories = ["Linux"]
 +++
 
@@ -190,13 +191,13 @@ Change: 2025-04-17 15:19:30.862800277 +0800
 
  [fedora的一个提案，这个arch好像早就统一了](https://fedoraproject.org/wiki/Changes/Unify_bin_and_sbin)
 
-![alt text](https://img.ffgan.com/%E7%A1%AC%E3%80%81%E8%BD%AF%E9%93%BE%E6%8E%A5/1744942913297_image.png)
+<img src="https://img.ffgan.com/%E7%A1%AC%E3%80%81%E8%BD%AF%E9%93%BE%E6%8E%A5/1744942913297_image.png" alt="1. 统一/usr/bin和/usr/sbin的截图" width="607" height="513" loading="lazy">
 
 目前来看还没合。
 
 不过这里看到/bin和/sbin已经软链接指向了/usr/bin和/usr/sbin
 
-![alt text](https://img.ffgan.com/%E7%A1%AC%E3%80%81%E8%BD%AF%E9%93%BE%E6%8E%A5/1744943060675_image.png)
+<img src="https://img.ffgan.com/%E7%A1%AC%E3%80%81%E8%BD%AF%E9%93%BE%E6%8E%A5/1744943060675_image.png" alt="1. 统一/usr/bin和/usr/sbin的截图 2" width="741" height="885" loading="lazy">
 
 ## 7. 参考链接
 

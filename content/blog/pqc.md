@@ -1,8 +1,9 @@
 +++
 title = "PQC简介"
-date = 2025-03-14
+date = 2025-04-26
+description = "从量子算法课的报告写起，介绍后量子密码和 NIST 的 ML-KEM，并对照 Go 标准库里的实现。"
 [taxonomies]
-tags = ["PQC","Cryptography"]
+tags = ["PQC", "Cryptography"]
 categories = ["Cryptography"]
 +++
 
@@ -101,7 +102,7 @@ categories = ["Cryptography"]
 
 首先贴出一张**来自标准里**介绍这个算法的图，一图胜千言
 
-![alt text](https://img.ffgan.com/遇事不决/1745675941997_image.png)
+<img src="https://img.ffgan.com/遇事不决/1745675941997_image.png" alt="2. ML-KEM的截图" width="1316" height="1101" loading="lazy">
 
 首先Alice生成一对用于封装和解封装的密钥对，简称ek、dk，其实分别是公钥、私钥。ek可以分发给Bob或者其他想要执行密钥封装的对象。dk则Alice自己持有。
 
@@ -121,10 +122,11 @@ Go官方的ml-kem库给了一个[example](https://pkg.go.dev/crypto/mlkem#pkg-ov
 
 先来看看整体的最外层，密钥生成自然不需要任何输入，输出有ek和dk。ek对外公布，dk保密。
 
-![alt text](https://img.ffgan.com/遇事不决/1745732659060_image.png)
+<img src="https://img.ffgan.com/遇事不决/1745732659060_image.png" alt="2.1 密钥生成的截图" width="1602" height="595" loading="lazy">
 
 图里的k和ml-kem的参数有关
-![alt text](https://img.ffgan.com/遇事不决/1745737009490_image.png)
+
+<img src="https://img.ffgan.com/遇事不决/1745737009490_image.png" alt="2.1 密钥生成的截图 2" width="1481" height="388" loading="lazy">
 
 首先是生成两个随机数𝑑和𝑧，都是32字节的。生成随机数后将两者作为参数传入 ML-KEM.KeyGen_internal 。返回得到(ek,dk)二元组。
 

@@ -1,8 +1,9 @@
 +++
 title = "马来之旅：槟城与兰卡威"
 date = 2026-09-14
+description = "公司年度旅游去了槟城和兰卡威，记下街景、吃食，以及和国内不一样的地方。"
 [taxonomies]
-tags = ["Travel"]
+tags = ["Penang", "Langkawi"]
 categories = ["Travel"]
 +++
 
@@ -40,7 +41,7 @@ categories = ["Travel"]
 
 12. 整体消费没有上海高，即便是旅游城市。
 
-![](https://img.ffgan.com/images/travel-01.png)
+<img src="https://img.ffgan.com/images/travel-01.png" alt="槟城清晨的沙滩" width="1440" height="960" loading="lazy">
 
 早起想去看太阳，去了酒店楼下的沙滩，沙滩朝北，看不到太阳，就在沙滩逛了会。有个老外在海滩边循环散步，第一次遇见我打了个照面，再次遇见的时候就和他聊上了。
 
@@ -62,15 +63,15 @@ categories = ["Travel"]
 
 入住的酒店附近有夜市，有蜜雪冰城和711，旁边还有华人开的超市
 
-![](https://img.ffgan.com/images/travel-02.png)
+<img src="https://img.ffgan.com/images/travel-02.png" alt="槟城夜市的蜜雪冰城" width="1080" height="1920" loading="lazy">
 
-![](https://img.ffgan.com/images/travel-03.png)
+<img src="https://img.ffgan.com/images/travel-03.png" alt="槟城夜市街景" width="1080" height="1920" loading="lazy">
 
 雪王的橙汁价格不贵，但是甜度起码是国内的3-4倍，巨甜。喝一口和喝蜂蜜没区别。
 
 
 
-![](https://img.ffgan.com/images/travel-04.png)
+<img src="https://img.ffgan.com/images/travel-04.png" alt="槟城华人超市的货架和标价" width="1080" height="1920" loading="lazy">
 
 华人超市。有很多和国内类似的商品。这里的RM是马来西亚的货币，大约和人民币是1.6的汇率，所以图中的百事可乐大约4.3块人民币。国内的话，盒马买，9.9可以买一组，有6罐330ml的。
 
@@ -78,31 +79,33 @@ categories = ["Travel"]
 
 夜宵的价格可以，比上海低，但是味道就不评价了，我广东人吃不惯。
 
-![](https://img.ffgan.com/images/travel-05.png)
+<img src="https://img.ffgan.com/images/travel-05.png" alt="槟城夜宵" width="1440" height="1920" loading="lazy">
 
  
 
 ### 兰卡威
 
-这几天是在马来的两个海岛旅游，第一个是槟城，第二个是兰卡威，之后再回槟城坐飞机飞回上海。最早从上海的浦东飞5-6小时到的槟城机场。在玩完乐园后，第二天的飞机飞兰卡威，半小时就能飞到，但是去飞机场、值机耗费了大部分时间。本来到了兰卡威，预定要坐缆车逛风景，天公不作美，下了场大雨。![](https://img.ffgan.com/images/travel-06.png)
+这几天是在马来的两个海岛旅游，第一个是槟城，第二个是兰卡威，之后再回槟城坐飞机飞回上海。最早从上海的浦东飞5-6小时到的槟城机场。在玩完乐园后，第二天的飞机飞兰卡威，半小时就能飞到，但是去飞机场、值机耗费了大部分时间。本来到了兰卡威，预定要坐缆车逛风景，天公不作美，下了场大雨。<img src="https://img.ffgan.com/images/travel-06.png" alt="兰卡威下雨时的景区" width="1440" height="960" loading="lazy">
 
 兰卡威的机场，不大。当天下雨。下飞机后要小走一段路，机场又准备伞，所以基本淋不到。
 
 由于下雨，当天的行程改为去逛当地的最大的水族馆，里面有企鹅，但是不建议去，拉完了。
 
-![](https://img.ffgan.com/images/travel-07.png)
+<img src="https://img.ffgan.com/images/travel-07.png" alt="兰卡威水族馆" width="1440" height="960" loading="lazy">
 
-![](https://img.ffgan.com/images/travel-08.png)
+<img src="https://img.ffgan.com/images/travel-08.png" alt="兰卡威水族馆里的展池" width="960" height="1440" loading="lazy">
 
-![](https://img.ffgan.com/images/travel-09.png)
+<img src="https://img.ffgan.com/images/travel-09.png" alt="兰卡威水族馆里的海洋生物" width="1440" height="960" loading="lazy">
 
 想看水族馆，可以看看上海滴水湖旁边的海昌海洋乐园，那里的大，表演多点。
 
 逛完水族馆就入住酒店了，是个海景房，晚上能去酒店自带的3楼游泳馆游泳。
 
-![](https://img.ffgan.com/images/travel-10.png)
+<img src="https://img.ffgan.com/images/travel-10.png" alt="兰卡威酒店的海景" width="1440" height="1080" loading="lazy">
 
-![](https://img.ffgan.com/images/travel-11.png)第二天主要有看船家喂老鹰+游客海钓+去游玩水上项目。水上项目有摩托艇、飞伞（一个降落伞绑在一个船上，然后逐渐放长绳子，船接着往前开，伞就会带着人飞起来，绳子放到一定程度就不放了，然后船接着走，人就在伞上吹风看海景，挺好看，远胜在各种风景好看的电脑壁纸，虚拟的远不及实物）、跳水、香蕉船、皮划艇（顺手去捞了几个空的废弃塑料瓶上岸），还有就是在海里穿着救生衣，在一个网上泡着，网是四周浮，中间沉下去的，可以抓牢，加上救生衣以此能牢固的浮在海上。最后还有个游艇派对，就此略过。
+<img src="https://img.ffgan.com/images/travel-11.png" alt="兰卡威的水上项目" width="960" height="1440" loading="lazy">
+
+第二天主要有看船家喂老鹰+游客海钓+去游玩水上项目。水上项目有摩托艇、飞伞（一个降落伞绑在一个船上，然后逐渐放长绳子，船接着往前开，伞就会带着人飞起来，绳子放到一定程度就不放了，然后船接着走，人就在伞上吹风看海景，挺好看，远胜在各种风景好看的电脑壁纸，虚拟的远不及实物）、跳水、香蕉船、皮划艇（顺手去捞了几个空的废弃塑料瓶上岸），还有就是在海里穿着救生衣，在一个网上泡着，网是四周浮，中间沉下去的，可以抓牢，加上救生衣以此能牢固的浮在海上。最后还有个游艇派对，就此略过。
 
 在游玩各个项目的时候，能看到女性穆斯林无论何项目，都完整裹全身，无论是游泳，还是坐飞伞，还是在游艇上跳舞。
 

@@ -1,9 +1,10 @@
 +++
 title = "django-5.2 适配 riscv64 环境"
-date = 2025-03-14
+date = 2025-05-15
+description = "把 Django 5.2 跑在 openEuler 的 riscv64 上，沿着启动流程处理缺的依赖。"
 [taxonomies]
-tags = ["django","Cryptography","riscv64"]
-categories = ["Python"]
+tags = ["django", "riscv64"]
+categories = ["Programming"]
 +++
 
 ## 适配对象
@@ -20,11 +21,11 @@ Django 5.2, Github Repo -> [链接](https://github.com/django/django/tree/5.2)
 
 先看看python环境
 
-![alt text](https://img.ffgan.com/%E8%AE%B0%E5%8F%82%E4%B8%8E%E7%AC%AC%E4%BA%8C%E6%9C%9F%E5%82%B2%E6%9D%A5%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%EF%BC%88EulixOS%EF%BC%89%E8%AE%AD%E7%BB%83%E8%90%A5/1747300957507_image.png)
+<img src="https://img.ffgan.com/%E8%AE%B0%E5%8F%82%E4%B8%8E%E7%AC%AC%E4%BA%8C%E6%9C%9F%E5%82%B2%E6%9D%A5%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%EF%BC%88EulixOS%EF%BC%89%E8%AE%AD%E7%BB%83%E8%90%A5/1747300957507_image.png" alt="适配过程的截图" width="1080" height="132" loading="lazy">
 
 嗯，有一个python环境。直接pip install django，看看怎么说。
 
-![alt text](https://img.ffgan.com/%E8%AE%B0%E5%8F%82%E4%B8%8E%E7%AC%AC%E4%BA%8C%E6%9C%9F%E5%82%B2%E6%9D%A5%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%EF%BC%88EulixOS%EF%BC%89%E8%AE%AD%E7%BB%83%E8%90%A5/1747301177274_image.png)
+<img src="https://img.ffgan.com/%E8%AE%B0%E5%8F%82%E4%B8%8E%E7%AC%AC%E4%BA%8C%E6%9C%9F%E5%82%B2%E6%9D%A5%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%EF%BC%88EulixOS%EF%BC%89%E8%AE%AD%E7%BB%83%E8%90%A5/1747301177274_image.png" alt="适配过程的截图 2" width="2151" height="432" loading="lazy">
 
 出乎意料的顺利？。安装的django版本为`5.2.1`，和要求的版本`5.2`不一致，重新安装一下，带上指定版本号。`pip uninstall django`即可。
 
@@ -32,7 +33,7 @@ Django 5.2, Github Repo -> [链接](https://github.com/django/django/tree/5.2)
 pip install django==5.2
 ```
 
-![alt text](https://img.ffgan.com/%E8%AE%B0%E5%8F%82%E4%B8%8E%E7%AC%AC%E4%BA%8C%E6%9C%9F%E5%82%B2%E6%9D%A5%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%EF%BC%88EulixOS%EF%BC%89%E8%AE%AD%E7%BB%83%E8%90%A5/1747301406713_image.png)
+<img src="https://img.ffgan.com/%E8%AE%B0%E5%8F%82%E4%B8%8E%E7%AC%AC%E4%BA%8C%E6%9C%9F%E5%82%B2%E6%9D%A5%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%EF%BC%88EulixOS%EF%BC%89%E8%AE%AD%E7%BB%83%E8%90%A5/1747301406713_image.png" alt="适配过程的截图 3" width="2148" height="302" loading="lazy">
 
 版本对上了。接下来启动一个django项目看看什么情况。之前django玩挺多，现在是忘挺多。打开官网得到一个对应的版本的quick start, [链接](https://docs.djangoproject.com/en/5.2/intro/tutorial01/)，按图索骥。
 
@@ -53,16 +54,18 @@ django-admin startproject mysite djangotutorial
 顺利的话，啥输出都没有。
 
 ls看看创建出来的文件夹  
-![alt text](https://img.ffgan.com/%E8%AE%B0%E5%8F%82%E4%B8%8E%E7%AC%AC%E4%BA%8C%E6%9C%9F%E5%82%B2%E6%9D%A5%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%EF%BC%88EulixOS%EF%BC%89%E8%AE%AD%E7%BB%83%E8%90%A5/1747301664379_image.png)
+
+<img src="https://img.ffgan.com/%E8%AE%B0%E5%8F%82%E4%B8%8E%E7%AC%AC%E4%BA%8C%E6%9C%9F%E5%82%B2%E6%9D%A5%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%EF%BC%88EulixOS%EF%BC%89%E8%AE%AD%E7%BB%83%E8%90%A5/1747301664379_image.png" alt="output: 5.2的截图" width="651" height="196" loading="lazy">
 
 没啥问题
 
 1. 启动项目
-![alt text](https://img.ffgan.com/%E8%AE%B0%E5%8F%82%E4%B8%8E%E7%AC%AC%E4%BA%8C%E6%9C%9F%E5%82%B2%E6%9D%A5%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%EF%BC%88EulixOS%EF%BC%89%E8%AE%AD%E7%BB%83%E8%90%A5/1747301787385_image.png)
+
+<img src="https://img.ffgan.com/%E8%AE%B0%E5%8F%82%E4%B8%8E%E7%AC%AC%E4%BA%8C%E6%9C%9F%E5%82%B2%E6%9D%A5%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%EF%BC%88EulixOS%EF%BC%89%E8%AE%AD%E7%BB%83%E8%90%A5/1747301787385_image.png" alt="output: 5.2的截图 2" width="1582" height="477" loading="lazy">
 
 顺利起来了，再起一个终端curl看看结果。
 
-![alt text](https://img.ffgan.com/%E8%AE%B0%E5%8F%82%E4%B8%8E%E7%AC%AC%E4%BA%8C%E6%9C%9F%E5%82%B2%E6%9D%A5%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%EF%BC%88EulixOS%EF%BC%89%E8%AE%AD%E7%BB%83%E8%90%A5/1747301830414_image.png)
+<img src="https://img.ffgan.com/%E8%AE%B0%E5%8F%82%E4%B8%8E%E7%AC%AC%E4%BA%8C%E6%9C%9F%E5%82%B2%E6%9D%A5%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%EF%BC%88EulixOS%EF%BC%89%E8%AE%AD%E7%BB%83%E8%90%A5/1747301830414_image.png" alt="output: 5.2的截图 3" width="1582" height="477" loading="lazy">
 
 一切顺利。
 
@@ -70,14 +73,15 @@ ls看看创建出来的文件夹
 
 那适配工作就算结束了？才刚刚开始。注意到项目里提到的软件适配过程要求，需要完成源码级构建。那就需要把5.2版本的Django源码拉到openEuler中，然后开始构建。同时需要注意一个细节，我们刚才装的django那个包名全称是Django-5.2-py3-none-any.whl，那么一般来说这里其实会指出支持linux、win之类，还有限定的指令集架构，这里没有，整了个any。这时候得跑去pypi看一眼什么情况。
 
-![alt text](https://img.ffgan.com/%E8%AE%B0%E5%8F%82%E4%B8%8E%E7%AC%AC%E4%BA%8C%E6%9C%9F%E5%82%B2%E6%9D%A5%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%EF%BC%88EulixOS%EF%BC%89%E8%AE%AD%E7%BB%83%E8%90%A5/1747302322793_image.png)
+<img src="https://img.ffgan.com/%E8%AE%B0%E5%8F%82%E4%B8%8E%E7%AC%AC%E4%BA%8C%E6%9C%9F%E5%82%B2%E6%9D%A5%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%EF%BC%88EulixOS%EF%BC%89%E8%AE%AD%E7%BB%83%E8%90%A5/1747302322793_image.png" alt="output: 5.2的截图 4" width="1830" height="1121" loading="lazy">
 
 可以看到5.2仅发布了一个any包，说明应该没啥令人头痛的兼容问题，我们可以大胆去跑一把本地源码构建，本地弄一个RV64下的包，然后装到环境里，按照上面的流程再来一次。如果一切**顺利**，再另说。
 
 接下来就要去拉源码了。
 
 需要装一下git
-![alt text](https://img.ffgan.com/%E8%AE%B0%E5%8F%82%E4%B8%8E%E7%AC%AC%E4%BA%8C%E6%9C%9F%E5%82%B2%E6%9D%A5%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%EF%BC%88EulixOS%EF%BC%89%E8%AE%AD%E7%BB%83%E8%90%A5/1747302536865_image.png)
+
+<img src="https://img.ffgan.com/%E8%AE%B0%E5%8F%82%E4%B8%8E%E7%AC%AC%E4%BA%8C%E6%9C%9F%E5%82%B2%E6%9D%A5%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%EF%BC%88EulixOS%EF%BC%89%E8%AE%AD%E7%BB%83%E8%90%A5/1747302536865_image.png" alt="output: 5.2的截图 5" width="901" height="198" loading="lazy">
 
 ```shell
 dnf install git -y
@@ -97,7 +101,7 @@ dnf/yum都可以，和小红帽一样。
 python3 -m pip install --upgrade build
 ```
 
-![alt text](https://img.ffgan.com/%E8%AE%B0%E5%8F%82%E4%B8%8E%E7%AC%AC%E4%BA%8C%E6%9C%9F%E5%82%B2%E6%9D%A5%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%EF%BC%88EulixOS%EF%BC%89%E8%AE%AD%E7%BB%83%E8%90%A5/1747303733259_image.png)
+<img src="https://img.ffgan.com/%E8%AE%B0%E5%8F%82%E4%B8%8E%E7%AC%AC%E4%BA%8C%E6%9C%9F%E5%82%B2%E6%9D%A5%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%EF%BC%88EulixOS%EF%BC%89%E8%AE%AD%E7%BB%83%E8%90%A5/1747303733259_image.png" alt="output: 5.2的截图 6" width="2097" height="393" loading="lazy">
 
 1. 打包
 
@@ -106,11 +110,12 @@ python3 -m build
 ```
 
 比较耗时，耐心等等
-![alt text](https://img.ffgan.com/%E8%AE%B0%E5%8F%82%E4%B8%8E%E7%AC%AC%E4%BA%8C%E6%9C%9F%E5%82%B2%E6%9D%A5%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%EF%BC%88EulixOS%EF%BC%89%E8%AE%AD%E7%BB%83%E8%90%A5/1747304051227_image.png)
+
+<img src="https://img.ffgan.com/%E8%AE%B0%E5%8F%82%E4%B8%8E%E7%AC%AC%E4%BA%8C%E6%9C%9F%E5%82%B2%E6%9D%A5%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%EF%BC%88EulixOS%EF%BC%89%E8%AE%AD%E7%BB%83%E8%90%A5/1747304051227_image.png" alt="output: 5.2的截图 7" width="980" height="300" loading="lazy">
 
 git忘记切换版本了，`git check 5.2`，再重新构建。
 
-![alt text](https://img.ffgan.com/%E8%AE%B0%E5%8F%82%E4%B8%8E%E7%AC%AC%E4%BA%8C%E6%9C%9F%E5%82%B2%E6%9D%A5%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%EF%BC%88EulixOS%EF%BC%89%E8%AE%AD%E7%BB%83%E8%90%A5/1747304480744_image.png)
+<img src="https://img.ffgan.com/%E8%AE%B0%E5%8F%82%E4%B8%8E%E7%AC%AC%E4%BA%8C%E6%9C%9F%E5%82%B2%E6%9D%A5%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%EF%BC%88EulixOS%EF%BC%89%E8%AE%AD%E7%BB%83%E8%90%A5/1747304480744_image.png" alt="output: 5.2的截图 8" width="1421" height="343" loading="lazy">
 
 轮子已经构建完了，接下来尝试装到本地，然后跑一趟之前的测试。
 
@@ -128,13 +133,14 @@ chronyc makestep # 显示200即可同步时间
 ）
 
 先把之前通过pip install的django5.2 uninstall掉。然后指定安装刚才构建出来的whl即可
-![alt text](https://img.ffgan.com/%E8%AE%B0%E5%8F%82%E4%B8%8E%E7%AC%AC%E4%BA%8C%E6%9C%9F%E5%82%B2%E6%9D%A5%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%EF%BC%88EulixOS%EF%BC%89%E8%AE%AD%E7%BB%83%E8%90%A5/1747311122372_image.png)
+
+<img src="https://img.ffgan.com/%E8%AE%B0%E5%8F%82%E4%B8%8E%E7%AC%AC%E4%BA%8C%E6%9C%9F%E5%82%B2%E6%9D%A5%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%EF%BC%88EulixOS%EF%BC%89%E8%AE%AD%E7%BB%83%E8%90%A5/1747311122372_image.png" alt="output: 5.2的截图 9" width="1620" height="356" loading="lazy">
 
 可以看到顺利安装成功了。接下来再走一次一开始的测试流程。经过测试同样是没有问题，说明能在RV64上顺利构建并正常运行。
 
 感觉有点不太正常。现在来回顾一下，是否有哪些地方缺失了。注意到django项目内有tests文件夹，那就顺便跑一把看看。
 
-![alt text](https://img.ffgan.com/%E8%AE%B0%E5%8F%82%E4%B8%8E%E7%AC%AC%E4%BA%8C%E6%9C%9F%E5%82%B2%E6%9D%A5%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%EF%BC%88EulixOS%EF%BC%89%E8%AE%AD%E7%BB%83%E8%90%A5/1747313587978_image.png)
+<img src="https://img.ffgan.com/%E8%AE%B0%E5%8F%82%E4%B8%8E%E7%AC%AC%E4%BA%8C%E6%9C%9F%E5%82%B2%E6%9D%A5%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%EF%BC%88EulixOS%EF%BC%89%E8%AE%AD%E7%BB%83%E8%90%A5/1747313587978_image.png" alt="output: 5.2的截图 10" width="1621" height="377" loading="lazy">
 
 ```shell
 cd tests
@@ -145,7 +151,7 @@ python3 -m pip install -r requirements/py3.txt
 
 总算是报了点错，具体是在装依赖的时候，里面有一个numpy-2.2.5报了错。
 
-![alt text](https://img.ffgan.com/%E8%AE%B0%E5%8F%82%E4%B8%8E%E7%AC%AC%E4%BA%8C%E6%9C%9F%E5%82%B2%E6%9D%A5%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%EF%BC%88EulixOS%EF%BC%89%E8%AE%AD%E7%BB%83%E8%90%A5/1747314318087_image.png)
+<img src="https://img.ffgan.com/%E8%AE%B0%E5%8F%82%E4%B8%8E%E7%AC%AC%E4%BA%8C%E6%9C%9F%E5%82%B2%E6%9D%A5%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%EF%BC%88EulixOS%EF%BC%89%E8%AE%AD%E7%BB%83%E8%90%A5/1747314318087_image.png" alt="output: 5.2的截图 11" width="935" height="266" loading="lazy">
 
 比较简单，装一个make看看。
 
@@ -155,21 +161,21 @@ dnf install make -y
 
 毫无疑问，依旧有报错，变成了下面这个。
 
-![alt text](https://img.ffgan.com/%E8%AE%B0%E5%8F%82%E4%B8%8E%E7%AC%AC%E4%BA%8C%E6%9C%9F%E5%82%B2%E6%9D%A5%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%EF%BC%88EulixOS%EF%BC%89%E8%AE%AD%E7%BB%83%E8%90%A5/1747314892298_image.png)
+<img src="https://img.ffgan.com/%E8%AE%B0%E5%8F%82%E4%B8%8E%E7%AC%AC%E4%BA%8C%E6%9C%9F%E5%82%B2%E6%9D%A5%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%EF%BC%88EulixOS%EF%BC%89%E8%AE%AD%E7%BB%83%E8%90%A5/1747314892298_image.png" alt="output: 5.2的截图 12" width="935" height="266" loading="lazy">
 
-![alt text](https://img.ffgan.com/%E8%AE%B0%E5%8F%82%E4%B8%8E%E7%AC%AC%E4%BA%8C%E6%9C%9F%E5%82%B2%E6%9D%A5%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%EF%BC%88EulixOS%EF%BC%89%E8%AE%AD%E7%BB%83%E8%90%A5/1747314928450_image.png)
+<img src="https://img.ffgan.com/%E8%AE%B0%E5%8F%82%E4%B8%8E%E7%AC%AC%E4%BA%8C%E6%9C%9F%E5%82%B2%E6%9D%A5%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%EF%BC%88EulixOS%EF%BC%89%E8%AE%AD%E7%BB%83%E8%90%A5/1747314928450_image.png" alt="output: 5.2的截图 13" width="1112" height="265" loading="lazy">
 
 报错信息还是比较清晰的，cmake这个whl构建不出来，再往上查找一下日志可以看到这个
 
-![alt text](https://img.ffgan.com/%E8%AE%B0%E5%8F%82%E4%B8%8E%E7%AC%AC%E4%BA%8C%E6%9C%9F%E5%82%B2%E6%9D%A5%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%EF%BC%88EulixOS%EF%BC%89%E8%AE%AD%E7%BB%83%E8%90%A5/1747314976257_image.png)
+<img src="https://img.ffgan.com/%E8%AE%B0%E5%8F%82%E4%B8%8E%E7%AC%AC%E4%BA%8C%E6%9C%9F%E5%82%B2%E6%9D%A5%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%EF%BC%88EulixOS%EF%BC%89%E8%AE%AD%E7%BB%83%E8%90%A5/1747314976257_image.png" alt="output: 5.2的截图 14" width="1112" height="265" loading="lazy">
 
 预期是使用>=3.15即可，然后这里使用了4.0.2。这里尝试一下直接指定用3.15。
 
-![alt text](https://img.ffgan.com/%E8%AE%B0%E5%8F%82%E4%B8%8E%E7%AC%AC%E4%BA%8C%E6%9C%9F%E5%82%B2%E6%9D%A5%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%EF%BC%88EulixOS%EF%BC%89%E8%AE%AD%E7%BB%83%E8%90%A5/1747315110479_image.png)
+<img src="https://img.ffgan.com/%E8%AE%B0%E5%8F%82%E4%B8%8E%E7%AC%AC%E4%BA%8C%E6%9C%9F%E5%82%B2%E6%9D%A5%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%EF%BC%88EulixOS%EF%BC%89%E8%AE%AD%E7%BB%83%E8%90%A5/1747315110479_image.png" alt="output: 5.2的截图 15" width="2195" height="253" loading="lazy">
 
 改用最近的3.16.3.
 
-![alt text](https://img.ffgan.com/%E8%AE%B0%E5%8F%82%E4%B8%8E%E7%AC%AC%E4%BA%8C%E6%9C%9F%E5%82%B2%E6%9D%A5%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%EF%BC%88EulixOS%EF%BC%89%E8%AE%AD%E7%BB%83%E8%90%A5/1747315203075_image.png)
+<img src="https://img.ffgan.com/%E8%AE%B0%E5%8F%82%E4%B8%8E%E7%AC%AC%E4%BA%8C%E6%9C%9F%E5%82%B2%E6%9D%A5%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%EF%BC%88EulixOS%EF%BC%89%E8%AE%AD%E7%BB%83%E8%90%A5/1747315203075_image.png" alt="output: 5.2的截图 16" width="1063" height="373" loading="lazy">
 
 又报新的错。这样下去不行。
 
@@ -179,7 +185,7 @@ cmake的话，试试看dnf能否装。
 dnf install cmake -y
 ```
 
-![alt text](https://img.ffgan.com/%E8%AE%B0%E5%8F%82%E4%B8%8E%E7%AC%AC%E4%BA%8C%E6%9C%9F%E5%82%B2%E6%9D%A5%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%EF%BC%88EulixOS%EF%BC%89%E8%AE%AD%E7%BB%83%E8%90%A5/1747315546819_image.png)
+<img src="https://img.ffgan.com/%E8%AE%B0%E5%8F%82%E4%B8%8E%E7%AC%AC%E4%BA%8C%E6%9C%9F%E5%82%B2%E6%9D%A5%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%EF%BC%88EulixOS%EF%BC%89%E8%AE%AD%E7%BB%83%E8%90%A5/1747315546819_image.png" alt="output: 5.2的截图 17" width="903" height="218" loading="lazy">
 
 缺啥装啥，这里应该缺gcc和g++
 
@@ -191,7 +197,7 @@ dnf install gcc g++ -y
 
 新的报错如下
 
-![alt text](https://img.ffgan.com/%E8%AE%B0%E5%8F%82%E4%B8%8E%E7%AC%AC%E4%BA%8C%E6%9C%9F%E5%82%B2%E6%9D%A5%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%EF%BC%88EulixOS%EF%BC%89%E8%AE%AD%E7%BB%83%E8%90%A5/1747316634348_image.png)
+<img src="https://img.ffgan.com/%E8%AE%B0%E5%8F%82%E4%B8%8E%E7%AC%AC%E4%BA%8C%E6%9C%9F%E5%82%B2%E6%9D%A5%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%EF%BC%88EulixOS%EF%BC%89%E8%AE%AD%E7%BB%83%E8%90%A5/1747316634348_image.png" alt="output: 5.2的截图 18" width="1062" height="637" loading="lazy">
 
 可以看到是在patchelf这个包的问题，里面的bootstrap.sh第二行用了一个autoreconf，报找不到。简单检索可得，安装autoconf即可。
 
@@ -199,7 +205,8 @@ dnf install gcc g++ -y
 dnf install autoconf -y
 ```
 
-![alt text](https://img.ffgan.com/%E8%AE%B0%E5%8F%82%E4%B8%8E%E7%AC%AC%E4%BA%8C%E6%9C%9F%E5%82%B2%E6%9D%A5%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%EF%BC%88EulixOS%EF%BC%89%E8%AE%AD%E7%BB%83%E8%90%A5/1747317065763_image.png)
+<img src="https://img.ffgan.com/%E8%AE%B0%E5%8F%82%E4%B8%8E%E7%AC%AC%E4%BA%8C%E6%9C%9F%E5%82%B2%E6%9D%A5%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%EF%BC%88EulixOS%EF%BC%89%E8%AE%AD%E7%BB%83%E8%90%A5/1747317065763_image.png" alt="output: 5.2的截图 19" width="1456" height="507" loading="lazy">
+
 再次检索可得，需要安装automake
 
 ```shell
@@ -208,11 +215,11 @@ dnf install automake -y
 
 整体的阶段从卡在installing backend dependcies到了preparing metadata。
 
-![alt text](https://img.ffgan.com/%E8%AE%B0%E5%8F%82%E4%B8%8E%E7%AC%AC%E4%BA%8C%E6%9C%9F%E5%82%B2%E6%9D%A5%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%EF%BC%88EulixOS%EF%BC%89%E8%AE%AD%E7%BB%83%E8%90%A5/1747317602886_image.png)
+<img src="https://img.ffgan.com/%E8%AE%B0%E5%8F%82%E4%B8%8E%E7%AC%AC%E4%BA%8C%E6%9C%9F%E5%82%B2%E6%9D%A5%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%EF%BC%88EulixOS%EF%BC%89%E8%AE%AD%E7%BB%83%E8%90%A5/1747317602886_image.png" alt="output: 5.2的截图 20" width="623" height="198" loading="lazy">
 
 具体是以下这个报错
 
-![alt text](https://img.ffgan.com/%E8%AE%B0%E5%8F%82%E4%B8%8E%E7%AC%AC%E4%BA%8C%E6%9C%9F%E5%82%B2%E6%9D%A5%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%EF%BC%88EulixOS%EF%BC%89%E8%AE%AD%E7%BB%83%E8%90%A5/1747317701181_image.png)
+<img src="https://img.ffgan.com/%E8%AE%B0%E5%8F%82%E4%B8%8E%E7%AC%AC%E4%BA%8C%E6%9C%9F%E5%82%B2%E6%9D%A5%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%EF%BC%88EulixOS%EF%BC%89%E8%AE%AD%E7%BB%83%E8%90%A5/1747317701181_image.png" alt="output: 5.2的截图 21" width="2155" height="658" loading="lazy">
 
 里面有个日志，我们去捞一下看看。cat一下，发现已经无了。那好吧，同样是去检索互联网可得，需要安装python3-devel。
 
@@ -224,13 +231,13 @@ dnf install python3-devel -y
 
 经典CPU吃满
 
-![alt text](https://img.ffgan.com/%E8%AE%B0%E5%8F%82%E4%B8%8E%E7%AC%AC%E4%BA%8C%E6%9C%9F%E5%82%B2%E6%9D%A5%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%EF%BC%88EulixOS%EF%BC%89%E8%AE%AD%E7%BB%83%E8%90%A5/1747318263602_image.png)
+<img src="https://img.ffgan.com/%E8%AE%B0%E5%8F%82%E4%B8%8E%E7%AC%AC%E4%BA%8C%E6%9C%9F%E5%82%B2%E6%9D%A5%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%EF%BC%88EulixOS%EF%BC%89%E8%AE%AD%E7%BB%83%E8%90%A5/1747318263602_image.png" alt="output: 5.2的截图 22" width="1415" height="216" loading="lazy">
 
 经过约摸半小时的构建，numpy成功装上。当然，少不了新的报错。
 
-![alt text](https://img.ffgan.com/%E8%AE%B0%E5%8F%82%E4%B8%8E%E7%AC%AC%E4%BA%8C%E6%9C%9F%E5%82%B2%E6%9D%A5%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%EF%BC%88EulixOS%EF%BC%89%E8%AE%AD%E7%BB%83%E8%90%A5/1747319547113_image.png)
+<img src="https://img.ffgan.com/%E8%AE%B0%E5%8F%82%E4%B8%8E%E7%AC%AC%E4%BA%8C%E6%9C%9F%E5%82%B2%E6%9D%A5%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%EF%BC%88EulixOS%EF%BC%89%E8%AE%AD%E7%BB%83%E8%90%A5/1747319547113_image.png" alt="output: 5.2的截图 23" width="1048" height="381" loading="lazy">
 
-![alt text](https://img.ffgan.com/%E8%AE%B0%E5%8F%82%E4%B8%8E%E7%AC%AC%E4%BA%8C%E6%9C%9F%E5%82%B2%E6%9D%A5%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%EF%BC%88EulixOS%EF%BC%89%E8%AE%AD%E7%BB%83%E8%90%A5/1747319559800_image.png)
+<img src="https://img.ffgan.com/%E8%AE%B0%E5%8F%82%E4%B8%8E%E7%AC%AC%E4%BA%8C%E6%9C%9F%E5%82%B2%E6%9D%A5%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%EF%BC%88EulixOS%EF%BC%89%E8%AE%AD%E7%BB%83%E8%90%A5/1747319559800_image.png" alt="output: 5.2的截图 24" width="2166" height="493" loading="lazy">
 
 同样，缺什么装什么
 
@@ -240,19 +247,19 @@ dnf install libffi-devel -y
 
 新的报错 1
 
-![alt text](https://img.ffgan.com/%E8%AE%B0%E5%8F%82%E4%B8%8E%E7%AC%AC%E4%BA%8C%E6%9C%9F%E5%82%B2%E6%9D%A5%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%EF%BC%88EulixOS%EF%BC%89%E8%AE%AD%E7%BB%83%E8%90%A5/1747321499187_image.png)
+<img src="https://img.ffgan.com/%E8%AE%B0%E5%8F%82%E4%B8%8E%E7%AC%AC%E4%BA%8C%E6%9C%9F%E5%82%B2%E6%9D%A5%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%EF%BC%88EulixOS%EF%BC%89%E8%AE%AD%E7%BB%83%E8%90%A5/1747321499187_image.png" alt="output: 5.2的截图 25" width="562" height="296" loading="lazy">
 
 日志给出的依赖要求
 
-![alt text](https://img.ffgan.com/%E8%AE%B0%E5%8F%82%E4%B8%8E%E7%AC%AC%E4%BA%8C%E6%9C%9F%E5%82%B2%E6%9D%A5%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%EF%BC%88EulixOS%EF%BC%89%E8%AE%AD%E7%BB%83%E8%90%A5/1747321520309_image.png)
+<img src="https://img.ffgan.com/%E8%AE%B0%E5%8F%82%E4%B8%8E%E7%AC%AC%E4%BA%8C%E6%9C%9F%E5%82%B2%E6%9D%A5%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%EF%BC%88EulixOS%EF%BC%89%E8%AE%AD%E7%BB%83%E8%90%A5/1747321520309_image.png" alt="output: 5.2的截图 26" width="562" height="296" loading="lazy">
 
 新的报错 2
 
-![alt text](https://img.ffgan.com/%E8%AE%B0%E5%8F%82%E4%B8%8E%E7%AC%AC%E4%BA%8C%E6%9C%9F%E5%82%B2%E6%9D%A5%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%EF%BC%88EulixOS%EF%BC%89%E8%AE%AD%E7%BB%83%E8%90%A5/1747321563774_image.png)
+<img src="https://img.ffgan.com/%E8%AE%B0%E5%8F%82%E4%B8%8E%E7%AC%AC%E4%BA%8C%E6%9C%9F%E5%82%B2%E6%9D%A5%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%EF%BC%88EulixOS%EF%BC%89%E8%AE%AD%E7%BB%83%E8%90%A5/1747321563774_image.png" alt="output: 5.2的截图 27" width="898" height="307" loading="lazy">
 
 新的报错 3
 
-![alt text](https://img.ffgan.com/%E8%AE%B0%E5%8F%82%E4%B8%8E%E7%AC%AC%E4%BA%8C%E6%9C%9F%E5%82%B2%E6%9D%A5%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%EF%BC%88EulixOS%EF%BC%89%E8%AE%AD%E7%BB%83%E8%90%A5/1747321588446_image.png)
+<img src="https://img.ffgan.com/%E8%AE%B0%E5%8F%82%E4%B8%8E%E7%AC%AC%E4%BA%8C%E6%9C%9F%E5%82%B2%E6%9D%A5%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%EF%BC%88EulixOS%EF%BC%89%E8%AE%AD%E7%BB%83%E8%90%A5/1747321588446_image.png" alt="output: 5.2的截图 28" width="1157" height="406" loading="lazy">
 
 依次解决
 
@@ -262,11 +269,11 @@ dnf install rustc zlib-devel libmemcached-devel -y
 
 新的报错 1
 
-![alt text](https://img.ffgan.com/%E8%AE%B0%E5%8F%82%E4%B8%8E%E7%AC%AC%E4%BA%8C%E6%9C%9F%E5%82%B2%E6%9D%A5%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%EF%BC%88EulixOS%EF%BC%89%E8%AE%AD%E7%BB%83%E8%90%A5/1747322319944_image.png)
+<img src="https://img.ffgan.com/%E8%AE%B0%E5%8F%82%E4%B8%8E%E7%AC%AC%E4%BA%8C%E6%9C%9F%E5%82%B2%E6%9D%A5%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%EF%BC%88EulixOS%EF%BC%89%E8%AE%AD%E7%BB%83%E8%90%A5/1747322319944_image.png" alt="output: 5.2的截图 29" width="1157" height="406" loading="lazy">
 
 新的报错 2
 
-![alt text](https://img.ffgan.com/%E8%AE%B0%E5%8F%82%E4%B8%8E%E7%AC%AC%E4%BA%8C%E6%9C%9F%E5%82%B2%E6%9D%A5%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%EF%BC%88EulixOS%EF%BC%89%E8%AE%AD%E7%BB%83%E8%90%A5/1747322457412_image.png)
+<img src="https://img.ffgan.com/%E8%AE%B0%E5%8F%82%E4%B8%8E%E7%AC%AC%E4%BA%8C%E6%9C%9F%E5%82%B2%E6%9D%A5%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%EF%BC%88EulixOS%EF%BC%89%E8%AE%AD%E7%BB%83%E8%90%A5/1747322457412_image.png" alt="output: 5.2的截图 30" width="1157" height="406" loading="lazy">
 
 ```shell
 dnf install libjpeg-devel cargo -y
@@ -274,7 +281,7 @@ dnf install libjpeg-devel cargo -y
 
 最终圆满装上
 
-![alt text](https://img.ffgan.com/%E8%AE%B0%E5%8F%82%E4%B8%8E%E7%AC%AC%E4%BA%8C%E6%9C%9F%E5%82%B2%E6%9D%A5%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%EF%BC%88EulixOS%EF%BC%89%E8%AE%AD%E7%BB%83%E8%90%A5/1747323726461_image.png)
+<img src="https://img.ffgan.com/%E8%AE%B0%E5%8F%82%E4%B8%8E%E7%AC%AC%E4%BA%8C%E6%9C%9F%E5%82%B2%E6%9D%A5%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%EF%BC%88EulixOS%EF%BC%89%E8%AE%AD%E7%BB%83%E8%90%A5/1747323726461_image.png" alt="output: 5.2的截图 31" width="2180" height="377" loading="lazy">
 
 下面可以看到本地build出来的wheel
 
@@ -297,13 +304,13 @@ dnf install libjpeg-devel cargo -y
 
 然后就可以开始跑测试了
 
-![alt text](https://img.ffgan.com/%E8%AE%B0%E5%8F%82%E4%B8%8E%E7%AC%AC%E4%BA%8C%E6%9C%9F%E5%82%B2%E6%9D%A5%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%EF%BC%88EulixOS%EF%BC%89%E8%AE%AD%E7%BB%83%E8%90%A5/1747324902537_image.png)
+<img src="https://img.ffgan.com/%E8%AE%B0%E5%8F%82%E4%B8%8E%E7%AC%AC%E4%BA%8C%E6%9C%9F%E5%82%B2%E6%9D%A5%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%EF%BC%88EulixOS%EF%BC%89%E8%AE%AD%E7%BB%83%E8%90%A5/1747324902537_image.png" alt="output: 5.2的截图 32" width="1370" height="88" loading="lazy">
 
 跑了快一个小时，4G内存吃完了就不动了。把主机内存全给他吃吧。
 
 卡着不动的具体表现是如下图，python3陷入了sleep，但是等待许久依旧不动。
 
-![alt text](https://img.ffgan.com/%E8%AE%B0%E5%8F%82%E4%B8%8E%E7%AC%AC%E4%BA%8C%E6%9C%9F%E5%82%B2%E6%9D%A5%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%EF%BC%88EulixOS%EF%BC%89%E8%AE%AD%E7%BB%83%E8%90%A5/1747366245367_image.png)
+<img src="https://img.ffgan.com/%E8%AE%B0%E5%8F%82%E4%B8%8E%E7%AC%AC%E4%BA%8C%E6%9C%9F%E5%82%B2%E6%9D%A5%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%EF%BC%88EulixOS%EF%BC%89%E8%AE%AD%E7%BB%83%E8%90%A5/1747366245367_image.png" alt="output: 5.2的截图 33" width="975" height="555" loading="lazy">
 
 和死锁差不多了。看到这里我想起一个笑话，说chromium的开发者都人均64G内存的开发机，所以压根感受不出来小内存情况下chrome存在的内存占用问题。咱们当然没有这么富裕的内存，首先尝试开一下swap，开个8G看看效果。
 
@@ -455,7 +462,7 @@ CACHES = {
 
 图数据库安装看起来比较麻烦，留到最后再看看。现在来直接配置一下Watchman。
 
-![alt text](https://img.ffgan.com/%E8%AE%B0%E5%8F%82%E4%B8%8E%E7%AC%AC%E4%BA%8C%E6%9C%9F%E5%82%B2%E6%9D%A5%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%EF%BC%88EulixOS%EF%BC%89%E8%AE%AD%E7%BB%83%E8%90%A5/1747473344628_image.png)
+<img src="https://img.ffgan.com/%E8%AE%B0%E5%8F%82%E4%B8%8E%E7%AC%AC%E4%BA%8C%E6%9C%9F%E5%82%B2%E6%9D%A5%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%EF%BC%88EulixOS%EF%BC%89%E8%AE%AD%E7%BB%83%E8%90%A5/1747473344628_image.png" alt="OK (skipped=20)的截图" width="1542" height="308" loading="lazy">
 
 有点搞，说fedora官方的Watchman过老。那我们简单手动操作一下，后续再写脚本一键起来。下载解压运行，报错。watchman官方给出来的包只有x86-64的。而watchman本身是多语言混合写的，在RV上编译的话工作量还是不小的，暂且搁置吧。
 

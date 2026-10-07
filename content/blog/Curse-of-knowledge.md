@@ -1,9 +1,10 @@
 +++
 title = "知识的诅咒"
 date = 2026-06-12
+description = "从一次 MATLAB 宣讲的问答写起，谈已经懂了的人为什么会默认别人也知道这些前提。"
 [taxonomies]
-tags = ["common"]
-categories = ["Other"]
+tags = ["notes"]
+categories = ["Notes"]
 +++
 
 ## 0. 引言

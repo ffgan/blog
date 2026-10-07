@@ -1,0 +1,26 @@
+name: zola-blog-ci
+
+on:
+  pull_request:
+  push:
+    branches: [master]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+
+      - name: Install Zola
+        uses: taiki-e/install-action@v2
+        with:
+          tool: zola@0.23.4
+
+      - name: Check site
+        run: zola check --skip-external-links
+
+      - name: Build site
+        run: zola build

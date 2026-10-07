@@ -1,9 +1,10 @@
 +++
 title = "参观阿帕奇软件基金会亚洲大会 2024"
 date = 2025-03-14
+description = "记录 2024 年 Apache 软件基金会亚洲大会上的见闻，以及基金会、社区和商业公司如何连在一起。"
 [taxonomies]
 tags = ["Apache"]
-categories = ["Meeting"]
+categories = ["Open Source"]
 +++
 
 ## 什么是Apache软件基金会
@@ -16,7 +17,7 @@ ASF比较出名的一个项目是一个叫httpd的HTTP服务器（LAMP当中的A
 
 ## 基金会担任的角色
 
-![基金会在社区和商业公司之间的扮演的角色](https://img.ffgan.com/visit_apache_asia_2024/role_between_company_and_community.png)
+<img src="https://img.ffgan.com/visit_apache_asia_2024/role_between_company_and_community.png" alt="基金会在社区和商业公司之间扮演的角色" width="569" height="333" loading="lazy">
 
 图片来自[此处](https://opensourceway.community/posts/foundation_introduce/foundation-introduce-in-fascinate-os/)
 
@@ -45,17 +46,17 @@ ASF比较出名的一个项目是一个叫httpd的HTTP服务器（LAMP当中的A
 
 拿门锁拍的，av画质
 
-![ant_group_opensource](https://img.ffgan.com/visit_apache_asia_2024/ant_group_opensource.png)
+<img src="https://img.ffgan.com/visit_apache_asia_2024/ant_group_opensource.png" alt="蚂蚁集团在大会上的开源介绍" width="1222" height="714" loading="lazy">
 
-![bytedance_opensource](https://img.ffgan.com/visit_apache_asia_2024/bytedance_opensource.png)
+<img src="https://img.ffgan.com/visit_apache_asia_2024/bytedance_opensource.png" alt="字节跳动在大会上的开源介绍" width="1182" height="714" loading="lazy">
 
-![selectdb_opensource](https://img.ffgan.com/visit_apache_asia_2024/selectdb_opensource.png)
+<img src="https://img.ffgan.com/visit_apache_asia_2024/selectdb_opensource.png" alt="SelectDB 在大会上的开源介绍" width="1162" height="689" loading="lazy">
 
-![openbayes_opensource](https://img.ffgan.com/visit_apache_asia_2024/openbayes_opensource.png)
+<img src="https://img.ffgan.com/visit_apache_asia_2024/openbayes_opensource.png" alt="OpenBayes 在大会上的开源介绍" width="1178" height="667" loading="lazy">
 
-![xiaomi_opensource](https://img.ffgan.com/visit_apache_asia_2024/xiaomi_opensource.png)
+<img src="https://img.ffgan.com/visit_apache_asia_2024/xiaomi_opensource.png" alt="小米在大会上的开源介绍" width="956" height="557" loading="lazy">
 
-![aliyun_opensource](https://img.ffgan.com/visit_apache_asia_2024/aliyun_opensource.png)
+<img src="https://img.ffgan.com/visit_apache_asia_2024/aliyun_opensource.png" alt="阿里云在大会上的开源介绍" width="1252" height="714" loading="lazy">
 
 ## 会议日程
 
