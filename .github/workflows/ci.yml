@@ -28,14 +28,23 @@ jobs:
       - name: Check generated HTML
         run: |
           set -euo pipefail
-          grep -q 'lang="zh-CN"' public/index.html
-          grep -q 'dir="ltr"' public/index.html
-          grep -q 'og:site_name' public/index.html
-          grep -q 'property="og:image"' public/index.html
-          grep -q '字' public/index.html
-          grep -q '分钟' public/index.html
+          # minify_html drops quotes around safe attribute values.
+          require() {
+            local file="$1"
+            local pattern="$2"
+            if ! grep -E -q "$pattern" "$file"; then
+              echo "missing /${pattern}/ in ${file}" >&2
+              exit 1
+            fi
+          }
+          require public/index.html 'lang="?zh-CN"?'
+          require public/index.html 'dir="?ltr"?'
+          require public/index.html 'og:site_name'
+          require public/index.html 'property="?og:image"?'
+          require public/index.html '字'
+          require public/index.html '分钟'
           test -f public/404.html
-          grep -q '页面不存在' public/404.html
+          require public/404.html '页面不存在'
           test ! -e public/js/vendor/katex
           python3 - << 'PY'
           import pathlib, re, sys
