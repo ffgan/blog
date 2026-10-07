@@ -1,5 +1,5 @@
 +++
-title = "About"
+title = "关于"
 description = "ffgan 的笔记，记录 Linux、RISC-V、容器、开源，以及偶尔的旅行。"
 template = "about.html"
 +++

@@ -1,6 +1,6 @@
 +++
-# title = "From title: Search"
-# description = "From description: Try Find posts by title or body content."
+title = "搜索"
+description = "按标题或正文查找文章"
 template = "search.html"
 [extra]
 # Signal to the footer to load search.js

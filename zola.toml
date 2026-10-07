@@ -122,7 +122,8 @@ toc_open = false
 
 # Whether to enable math rendering (KaTeX) site-wide gate.
 # Pages still need front matter: [extra] mathjax = true
-enable_mathjax = true
+# No post opts in, so the KaTeX files are left out of the deploy below.
+enable_mathjax = false
 
 [extra.cela]
 # <html lang>. Not default_language: that value has to be an elasticlunr language.
@@ -139,13 +140,14 @@ icon_dark = "svg/cela_new_small_rec.svg"
 date_format = "%Y-%m-%d"
 show_home_title = true
 home_title = "Keep it simple, stupid"
-home_eyebrow = "Notes"
+home_eyebrow = "笔记"
+og_image = "android-chrome-512x512.png"
 navigation = [
-  {path = "/about", title = "About"},
-  {path = "/archive", title = "Archive"},
-  {path = "/tags", title = "Tags"},
-  {path = "/categories", title = "Categories"},
-  {path = "#", title = "Search", is_search = true},
+  {path = "/about", title = "关于"},
+  {path = "/archive", title = "归档"},
+  {path = "/tags", title = "标签"},
+  {path = "/categories", title = "分类"},
+  {path = "#", title = "搜索", is_search = true},
   # {path = "/robot", title = "Robot", is_robot = true},
   # {path = "https://getzola.org/", title = "Zola", is_external = true},
 ]
@@ -201,7 +203,7 @@ unfold_toc = false
 show_word_count = true
 
 # [Cela hint] Cela will use this for search page title (default is "Search" if not set)
-search_title = "Search"
+search_title = "搜索"
 # [Cela hint] Cela will use this for search page description (default is "Find posts by title or body content" if not set)
 search_description = "按标题或正文查找文章"
 
@@ -218,7 +220,7 @@ title_show = true
 # Title prefix/delimiter before page or section title
 title_prefix = "🌟"
 # Value of the HTML dir attribute (ltr, rtl, or auto)
-i18n_dir = "auto"
+i18n_dir = "ltr"
 
 # # TODO
 # # Whether to load social icons (default = true)

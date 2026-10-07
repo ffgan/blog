@@ -24,3 +24,27 @@ jobs:
 
       - name: Build site
         run: zola build
+
+      - name: Check generated HTML
+        run: |
+          set -euo pipefail
+          grep -q 'lang="zh-CN"' public/index.html
+          grep -q 'dir="ltr"' public/index.html
+          grep -q 'og:site_name' public/index.html
+          grep -q 'property="og:image"' public/index.html
+          grep -q '字' public/index.html
+          grep -q '分钟' public/index.html
+          test -f public/404.html
+          grep -q '页面不存在' public/404.html
+          test ! -e public/js/vendor/katex
+          python3 - << 'PY'
+          import pathlib, re, sys
+          bad = []
+          for path in pathlib.Path("public").rglob("*.html"):
+              text = path.read_text(encoding="utf-8", errors="ignore")
+              if re.search(r"https://blog\.ffgan\.com/blog/([\"'\s>]|$)", text):
+                  bad.append(str(path))
+          if bad:
+              print("breadcrumb still points at /blog/:", bad)
+              sys.exit(1)
+          PY
