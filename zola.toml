@@ -211,10 +211,12 @@ search_description = "按标题或正文查找文章"
 
 [extra.cela.color]
 
-default_theme = "dark"
-# If disable javascript, the website will always use the default_theme
+# "auto" follows the device. "light" or "dark" pin that scheme.
+# A real Material 3 device accent recolours whichever scheme is active.
+# Browsers that hide the accent keep the static blue palette.
+default_theme = "auto"
 remember_choice = true
-# If remeber_choice is true, the cookie/localStorage will use the theme last time user visited
+# The theme toggle stores an explicit choice. A first visit does not.
 
 [extra.cela.global]
 # Whether to show the original title defined in base configure
